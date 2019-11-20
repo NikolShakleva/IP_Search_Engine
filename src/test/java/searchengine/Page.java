@@ -1,7 +1,16 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> d9f6f8d6dcf7e695a8df4ecd6f0f32339fcb1abd
 package searchengine;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+>>>>>>> Emelie
+>>>>>>> d9f6f8d6dcf7e695a8df4ecd6f0f32339fcb1abd
 // my comment
 // second comment
 //third comment
@@ -25,4 +34,7 @@ public class Page
     private ArrayList<String> list;
 }
 >>>>>>> Emelie
+<<<<<<< HEAD
+>>>>>>> d9f6f8d6dcf7e695a8df4ecd6f0f32339fcb1abd
+=======
 >>>>>>> d9f6f8d6dcf7e695a8df4ecd6f0f32339fcb1abd
