@@ -18,10 +18,12 @@ public class WebServer {
   static final int PORT = 8080;
   static final int BACKLOG = 0;
   static final Charset CHARSET = StandardCharsets.UTF_8;
+  //comments hello git
 
   List<List<String>> pages = new ArrayList<>();
   HttpServer server;
-
+ 
+  //Constructor
   WebServer(int port, String filename) throws IOException {
     try {
       List<String> lines = Files.readAllLines(Paths.get(filename));
@@ -51,6 +53,8 @@ public class WebServer {
     System.out.println("│"+msg+"│");
     System.out.println("╰"+"─".repeat(msg.length())+"╯");
   }
+
+  //METHODS
   
   void search(HttpExchange io) {
     var searchTerm = io.getRequestURI().getRawQuery().split("=")[1];
