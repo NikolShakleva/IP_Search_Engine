@@ -21,7 +21,8 @@ public class WebServer {
 
   List<List<String>> pages = new ArrayList<>();
   HttpServer server;
-
+ 
+  //Constructor
   WebServer(int port, String filename) throws IOException {
     try {
       List<String> lines = Files.readAllLines(Paths.get(filename));
