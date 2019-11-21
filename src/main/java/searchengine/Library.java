@@ -1,8 +1,5 @@
 package searchengine;
 
-/**
-package searchengine;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,16 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Library
- */
+
+
 public class Library {
     private ArrayList<Page> library;
 
-    public Library()
+    public Library(ArrayList<Page> library)
     {
-        library = new ArrayList<Page>();
-        Collections.reverse(library);
+        this. library = library;
     }
 
     public void add(Page page)
