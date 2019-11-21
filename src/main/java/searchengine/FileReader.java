@@ -67,26 +67,5 @@ public class FileReader {
     {
         System.out.println(library);
     }
-
-    // public void read(String filename) throws IOException
-    // {
-    // try {
-    //     List<String> lines = Files.readAllLines(Paths.get(filename));
-    //     var lastIndex = lines.size();
-    //     for (var i = lines.size() - 1; i >= 0; --i) {
-    //       if (lines.get(i).startsWith("*PAGE")) {
-    //         String webname = lines.get(i);
-    //         // i'm not sure about the one below, it looks like it takes only first page but on the other 
-    //         //hand the search engine works well so idk what's going on here
-    //         List<String> words = lines.subList(i-1, lastIndex);
-    //         Page page = new Page(webname, words);
-    //         library.add(page);
-    //         lastIndex = i;
-    //       }
-    //     }
-    //   } catch (FileNotFoundException e) {
-    //     e.printStackTrace();
-    //   }
-    // }
     
 }
