@@ -4,8 +4,16 @@ document.getElementById('searchbutton').onclick = () => {
     fetch("/search?q=" + document.getElementById('searchbox').value)
     .then((response) => response.json())
     .then((data) => {
+        
+        if(data.length==0){
+            document.getElementById("responsesize").innerHTML = 
+            "<p> No website contains the query word.</p>";
+        }
+        else{
         document.getElementById("responsesize").innerHTML = 
-            "<p>" + data.length + " websites retrieved</p>";
+            "<p>" + data.length + " websites and this retrieved</p>";
+        }
+        
         let results = data.map((page) =>
             `<li><a href="${page.url}">${page.title}</a></li>`)
             .join("\n");
