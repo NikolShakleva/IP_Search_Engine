@@ -34,9 +34,9 @@ public class FileReader {
     
             while(input.hasNextLine())
             {
-                String linia = input.nextLine();
+                String url = input.nextLine();
                 String title = input.nextLine();
-                Matcher m1 = p1.matcher(linia);
+                Matcher m1 = p1.matcher(url);
                 boolean b1 = m1.matches();
                 //System.out.println(b1);
 
@@ -45,7 +45,7 @@ public class FileReader {
 
                   ArrayList<String> pageWords = new ArrayList<>();
                   pageWords.add(input.nextLine());
-                  Page page = new Page(linia, title, pageWords);
+                  Page page = new Page(url, title, pageWords);
                   library.add(page);
                 }
             }
