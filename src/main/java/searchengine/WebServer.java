@@ -73,10 +73,7 @@ public class WebServer {
         var searchTerm = io.getRequestURI().getRawQuery().split("=")[1];  //transforms search input to string
         var query = new Query(searchTerm, library);                       //creates a query class and sends searchword
         var correctPages = query.getCorrectPages();  
-        if(correctPages == null)  {
-          var bytes = "No such search".getBytes(CHARSET);
-          display(io, 200, "application/json", bytes);
-        }                     //returns list of matching pages
+                                                                            //returns list of matching pages
 
         respond(io, correctPages);                                        //sends info to response
       }

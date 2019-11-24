@@ -12,9 +12,6 @@ public class Page{
         this.title = pageTitle;
         this.url = pageUrl;
         relevance = 0;
-       // System.out.println(words);
-
-
     }
 
     public boolean check(String input){

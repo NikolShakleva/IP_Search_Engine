@@ -14,7 +14,7 @@ public class Responder{
 
     public Responder(ArrayList<Page> correctPages){
         this.correctPages = new ArrayList<Page>(correctPages);
-       // this.webOutPut = correctPages;
+
        
     }
     /**
