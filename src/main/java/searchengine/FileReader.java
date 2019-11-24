@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Library
+ * Library Class
+ * Stores all the pages 
+ * 
+ * @author Ewa, Emelie, Nikol, Philip
+ * @version 2019.11.24
+ * 
  */
 public class FileReader {
 
@@ -54,56 +59,20 @@ public class FileReader {
                         }
                 } 
                 Page pt = new Page(pageUrl,title, words);
+                if(words.size() >= 1) {
                 allPages.add(pt);
-    
-        }
-    
-    } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        
- } 
-        
-        
-        
-        /*
-        try
-        {
-            List<String> lines = Files.readAllLines(Paths.get(filename));
-            var lastIndex = lines.size();
-            for (var i = lines.size() - 1; i >= 0; --i) {
-            if (lines.get(i).startsWith("*PAGE")) {
-             allPages.add(lines.subList(i, lastIndex));
-             lastIndex = i;
-        }
-      }
-
-          /*  File file = new File(filename);
-            Scanner input = new Scanner(file);
-    
-            while(input.hasNextLine()) {
-              String url = input.nextLine();
-                if(url.contains("*PAGE"))  {
-                  String pageTitle = input.nextLine();
-                  ArrayList<String> pageWords = new ArrayList<>();
-                    while (input.hasNextLine()){
-                        if(!input.nextLine().contains("*PAGE")) {
-                        pageWords.add(input.nextLine());
-                    }
-                    Page page = new Page(url, pageTitle, pageWords);
-                    allPages.add(page);
-                    } 
                 }
             }
-            input.close();
-        }
-          catch(Exception e)
-          {  
-            System.out.println("site is wrong");
-         }
-      
-        }*/
-        
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }     
+ }      
+ /**
+  * Getting a List with all Pages Stored
+  * 
+  * @return an ArrayList with all Pages Stored
+  */
         public ArrayList<Page> getAllPagesList()    {
             return allPages;
         }

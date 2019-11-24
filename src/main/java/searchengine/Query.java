@@ -3,21 +3,27 @@ import java.util.*;
 
 /**
  * Query
+ * 
+ * @author Ewa, Emelie, Nikol, Philip
+ * @version 2019.11.24
  */
 public class Query {
-   // private ArrayList<String> wrongWords;
+
     private ArrayList<Page> relevantPages;
     private Library library;
 
     public Query(String input, Library library){
         this.library = library;
         relevantPages = library.matchingPages(input);
-       
     }
 
-    public ArrayList<Page> getCorrectPages(){
-        return this.relevantPages;
+    /**
+     * 
+     * @return, ArrayList of pages matching the search Term
+     */
 
+    public ArrayList<Page> getCorrectPages()    {
+        return this.relevantPages;
     }
 
 

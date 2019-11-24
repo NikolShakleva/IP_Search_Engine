@@ -1,7 +1,14 @@
 package searchengine;
-//iterates accross library
-//has a tostring method that completes the respond portion of the web server
 import java.util.*;
+
+/**
+ * 
+ * 
+ * @author Ewa, Emelie, Nikol, Philip
+ * @version 2019.11.24
+ * 
+ */
+
 public class Responder{
     private ArrayList<Page> correctPages;
 
@@ -10,7 +17,11 @@ public class Responder{
        // this.webOutPut = correctPages;
        
     }
-    
+    /**
+     * 
+     * 
+     * @return, an ArrayList with pages formatted with URL and Title for the server to display
+     */
     public ArrayList<String> getPageNames(){
         ArrayList<String> response = new ArrayList<>(); 
         for (Page page: correctPages){
