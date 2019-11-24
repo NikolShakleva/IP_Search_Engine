@@ -2,78 +2,70 @@ package searchengine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
- * Library Class
- * Stores all the pages 
- * 
- * @author Ewa, Emelie, Nikol, Philip
- * @version 2019.11.24
- * 
+ * Library
  */
 public class FileReader {
 
-    private ArrayList<Page> allPages;
+    private ArrayList<Page> library;
 
-    public FileReader(String filename)
+    public FileReader()
     {
-        allPages = new ArrayList<Page>();
-        readFile(filename);
+        library = new ArrayList<>();
     }
-    /**
-     * Reading the file and creates pages that are added to an arraylist
-     * 
-     * @param filename
-     */
-    public void readFile(String filename)   {        
-        try {
-            Scanner sc = new Scanner(new File(filename));
-            String pageURL = "";
-            String title = "";
-            String pageUrl = "";
-            String line = sc.nextLine();
-            while (sc.hasNextLine()){
-                ArrayList<String> words = new ArrayList<>();
-                if(line.startsWith("*Page")) {
-                    pageUrl = line;
 
-                } else {
-                    pageUrl = pageURL;
-                }
-                    if (sc.hasNextLine()) {
-                        line = sc.nextLine();
-                        title = line;
-                    }
-                    
-                while (sc.hasNextLine()){
-                    line = sc.nextLine();
-                    if (line.startsWith("*")) {
-                        pageURL = line;
-                        break;
-                        } else {
-                    words.add(line);
-                        }
-                } 
-                Page pt = new Page(pageUrl,title, words);
-                if(words.size() >= 1) {
-                allPages.add(pt);
+    public void readInInternet(String locationOfInternet)
+    {
+        try
+        {
+            File file = new File(locationOfInternet);
+            Scanner input = new Scanner(file);
+
+            Pattern p1 = Pattern.compile("\\*PAGE:.*");
+    
+            while(input.hasNextLine())
+            {
+                String url = input.nextLine();
+                String title = input.nextLine();
+                Matcher m1 = p1.matcher(url);
+                boolean b1 = m1.matches();
+                //System.out.println(b1);
+
+                if(b1)
+                {
+
+                  ArrayList<String> pageWords = new ArrayList<>();
+                  pageWords.add(input.nextLine());
+                  Page page = new Page(url, title, pageWords);
+                  library.add(page);
                 }
             }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }     
- }      
- /**
-  * Getting a List with all Pages Stored
-  * 
-  * @return an ArrayList with all Pages Stored
-  */
-        public ArrayList<Page> getAllPagesList()    {
-            return allPages;
         }
+          catch(Exception e)
+          {  
+              System.out.println("sth is wrong");
+         }
+      
+        
     }
+
+    public ArrayList<Page> getArrrayOfPages()
+    {
+      return library;
+    }
+
+    public void printArray()
+    {
+        System.out.println(library);
+    }
+    
+}

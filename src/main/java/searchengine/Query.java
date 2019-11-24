@@ -1,13 +1,21 @@
 package searchengine;
 import java.util.*;
 
+import java.util.List;
+
 /**
  * Query
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24
  */
-public class Query {
+ class Query {
+     String searchTerm;
+     List<Page> matchingList;
+
+     Query(String searchTerm)  {
+       this.searchTerm = searchTerm;
+
 
     private ArrayList<Page> relevantPages;
     private Library library;
