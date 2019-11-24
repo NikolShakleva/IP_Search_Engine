@@ -2,10 +2,9 @@ package searchengine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -30,15 +29,15 @@ public class FileReader {
             Scanner sc = new Scanner(new File(filename));
             String pageURL = "";
             String title = "";
-            String pageName = "";
+            String pageUrl = "";
             String line = sc.nextLine();
             while (sc.hasNextLine()){
                 ArrayList<String> words = new ArrayList<>();
                 if(line.startsWith("*Page")) {
-                    pageName = line;
+                    pageUrl = line;
 
                 } else {
-                    pageName = pageURL;
+                    pageUrl = pageURL;
                 }
                     if (sc.hasNextLine()) {
                         line = sc.nextLine();
@@ -54,7 +53,7 @@ public class FileReader {
                     words.add(line);
                         }
                 } 
-                Page pt = new Page(pageName,title, words);
+                Page pt = new Page(pageUrl,title, words);
                 allPages.add(pt);
     
         }

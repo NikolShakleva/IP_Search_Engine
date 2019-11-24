@@ -5,14 +5,14 @@ import java.util.*;
  * Query
  */
 public class Query {
-    private ArrayList<String> wrongWords;
+   // private ArrayList<String> wrongWords;
     private ArrayList<Page> relevantPages;
     private Library library;
 
     public Query(String input, Library library){
         this.library = library;
-        library.matchingPages(input);
-        relevantPages = library.getRelevantPages();
+        relevantPages = library.matchingPages(input);
+       
     }
 
     public ArrayList<Page> getCorrectPages(){

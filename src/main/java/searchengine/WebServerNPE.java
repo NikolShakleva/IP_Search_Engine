@@ -15,7 +15,7 @@ import com.sun.net.httpserver.HttpServer;
 /**
  * WebServer2
  */
-public class WebServer {
+public class WebServerNPE {
     static final int PORT = 8080;
     static final int BACKLOG = 0;
     static final Charset CHARSET = StandardCharsets.UTF_8;
@@ -24,14 +24,14 @@ public class WebServer {
     Library library;
     FileReader fileReader;
 
-       WebServer(int port, String filename) throws IOException {
+       WebServerNPE (int port, String filename) throws IOException {
        fileReader = new FileReader(filename);                          //sends file to FileReader class
        library = new Library(fileReader.getAllPagesList());                    //gets a ArrayList<Pages> and creates a library
 
 
       server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
       server.createContext("/", io -> display(io, 200, "text/html", getFile("web/index.html")));
-      server.createContext("/search", io -> search(io));
+      server.createContext("/search", io -> search("searchTerm"));
       server.createContext(
             "/favicon.ico", io -> display(io, 200, "image/x-icon", getFile("web/favicon.ico")));
       server.createContext(
@@ -65,12 +65,12 @@ public class WebServer {
      * Searches for search input in library
      * @param io
      */
-    public void search(HttpExchange io) {  
-        var searchTerm = io.getRequestURI().getRawQuery().split("=")[1];  //transforms search input to string
+    public void search(String searchTerm) {  
+       // var searchTerm = io.getRequestURI().getRawQuery().split("=")[1];  //transforms search input to string
         var query = new Query(searchTerm, library);                       //creates a query class and sends searchword
         var correctPages = query.getCorrectPages();                       //returns list of matching pages
 
-        respond(io, correctPages);                                        //sends info to response
+        respond(correctPages);                                        //sends info to response
       }
       /**
        * cretes a response for search input
@@ -78,12 +78,12 @@ public class WebServer {
        * @param io
        * @param matchingList
        */
-      void respond(HttpExchange io, ArrayList<Page> correctPages) { 
+      void respond(ArrayList<Page> correctPages) { 
         var responder = new Responder(correctPages);                         //creates a responder class with list from query
         List<String> response = new ArrayList<>(responder.getPageNames());   //returns respons from responder
         var bytes = response.toString().getBytes(CHARSET);                   //translates response to bytes
         
-        display(io, 200, "application/json", bytes);                         //sends respons to display
+      //  display(io, 200, "application/json", bytes);                         //sends respons to display
       }
       /**
        * Displays response
@@ -113,8 +113,8 @@ public class WebServer {
       }
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename);
-      
+        var webserver = new WebServer(PORT, filename);
+        
        
       }
 }

@@ -4,13 +4,13 @@ import java.util.*;
 public class Page{
     private int relevance;
     private ArrayList<String> words;
-    private String name;
+    private String url;
     private String title;
 
-    public Page(String pageName, String pageTitle, ArrayList<String> pageWords){
+    public Page(String pageUrl, String pageTitle, ArrayList<String> pageWords){
         this.words = pageWords;
         this.title = pageTitle;
-        this.name = pageName;
+        this.url = pageUrl;
         relevance = 0;
        // System.out.println(words);
 
@@ -26,8 +26,8 @@ public class Page{
        public ArrayList<String> getWords()  {
            return words;
        }
-    public String getName(){
-        return this.name;
+    public String getUrl(){
+        return this.url;
     }
     public String getTitle(){
         return this.title;
