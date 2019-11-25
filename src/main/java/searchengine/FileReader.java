@@ -56,9 +56,9 @@ public class FileReader {
                         }
                 } 
                 Page pt = new Page(pageUrl,title, words);
-                if(words.size() >= 1) {
+                //if(words.size() >= 1) {
                 allPages.add(pt);
-                }
+                //}
         } sc.close();
     
     } catch (FileNotFoundException e) {

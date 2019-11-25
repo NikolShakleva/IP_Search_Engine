@@ -35,8 +35,8 @@ public class Library {
      * 
      * @param x
      */
-    public void addPage(Page x){
+   /* public void addPage(Page x){
         allPages.add(x);
-    }
+    }*/
     
 }
