@@ -2,13 +2,15 @@ package searchengine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
-
 import java.util.Scanner;
 
 /**
- * Library
+ * FileReader Class
+ * 
+ * @author Emelie, Ewa, Nikol, Philip
+ * @version 2019.11.24
+ * 
  */
 public class FileReader {
 
@@ -20,9 +22,9 @@ public class FileReader {
         readFile(filename);
     }
     /**
-     * Reading the file and creates pages that are added to an arraylist
+     * Reading the file given from the webserver and creates pages that are added to an arraylist
      * 
-     * @param filename
+     * @param filename, filename of text file with websites containing url, title and words
      */
     public void readFile(String filename)   {        
         try {
@@ -63,7 +65,11 @@ public class FileReader {
             e.printStackTrace();
         }        
  } 
-        
+        /**
+         * 
+         * 
+         * @return, ArrayList with page objects
+         */
         public ArrayList<Page> getAllPagesList()    {
             return allPages;
         }

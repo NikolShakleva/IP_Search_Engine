@@ -2,7 +2,7 @@ package searchengine;
 import java.util.*;
 
 /**
- * 
+ * Responder
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24
@@ -14,11 +14,9 @@ public class Responder{
 
     public Responder(ArrayList<Page> correctPages){
         this.correctPages = new ArrayList<Page>(correctPages);
-
-       
     }
+    
     /**
-     * 
      * 
      * @return, an ArrayList with pages formatted with URL and Title for the server to display
      */
@@ -29,14 +27,6 @@ public class Responder{
             String title = page.getTitle();
             response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\"}",
                                  url.substring(6), title));
-
-
-        }
-        
-        return response;
-
+        } return response;
     }
-
-
-
 }

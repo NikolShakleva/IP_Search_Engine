@@ -13,7 +13,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 /**
- * WebServer2
+ * WebServer
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24
@@ -29,8 +29,8 @@ public class WebServer {
     FileReader fileReader;
 
        WebServer(int port, String filename) throws IOException {
-       fileReader = new FileReader(filename);                                  //sends file to FileReader class
-       library = new Library(fileReader.getAllPagesList());                    //gets a ArrayList<Pages> and creates a library
+       fileReader = new FileReader(filename);                             
+       library = new Library(fileReader.getAllPagesList());                   
 
 
       server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
@@ -52,7 +52,7 @@ public class WebServer {
       /**
        * creates readable content of file for server in bytes
        * 
-       * @param filename
+       * @param filename, name of file to be translated into bytes
        * @return file translated to bytes
        */
       byte[] getFile(String filename) {
@@ -70,13 +70,14 @@ public class WebServer {
      * @param io, HttpExchange
      */
     public void search(HttpExchange io) {  
-        var searchTerm = io.getRequestURI().getRawQuery().split("=")[1];  //transforms search input to string
-        var query = new Query(searchTerm, library);                       //creates a query class and sends searchword
+        var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
+        var query = new Query(searchTerm, library);                       
         var correctPages = query.getCorrectPages();  
-                                                                            //returns list of matching pages
+                                                                           
 
-        respond(io, correctPages);                                        //sends info to response
+        respond(io, correctPages);                                        
       }
+
       /**
        * cretes a response for search input
        * 
@@ -84,12 +85,13 @@ public class WebServer {
        * @param correctPages, ArrayList of results matching the SearchWord
        */
       void respond(HttpExchange io, ArrayList<Page> correctPages) { 
-        var responder = new Responder(correctPages);                         //creates a responder class with list from query
-        List<String> response = new ArrayList<>(responder.getPageNames());   //returns respons from responder
-        var bytes = response.toString().getBytes(CHARSET);                   //translates response to bytes
+        var responder = new Responder(correctPages);                        
+        List<String> response = new ArrayList<>(responder.getPageNames());   
+        var bytes = response.toString().getBytes(CHARSET);                  
         
-        display(io, 200, "application/json", bytes);                         //sends respons to display
+        display(io, 200, "application/json", bytes);                       
       }
+
       /**
        * Displays the response on the server
        * 
@@ -97,8 +99,7 @@ public class WebServer {
        * @param code, integer
        * @param mime, String(application/json)
        * @param response, byte[]
-       */
-        
+       */   
       void display(HttpExchange io, int code, String mime, byte[] response)  {
         try {
           io.getResponseHeaders()

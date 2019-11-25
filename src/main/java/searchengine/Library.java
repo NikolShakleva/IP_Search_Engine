@@ -16,8 +16,9 @@ public class Library {
     }
     /**
      * Matches the searchTerm to all the pages stored in the Library
+     * and creates a List of Matching Pages.
      * 
-     * @param input
+     * @param input, searchTerm from user
      * @return an ArrayList with matching pages to the serchTerm
      */
     public ArrayList<Page> matchingPages(String input){
