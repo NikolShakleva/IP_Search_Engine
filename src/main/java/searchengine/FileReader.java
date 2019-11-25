@@ -59,11 +59,11 @@ public class FileReader {
                 if(words.size() >= 1) {
                 allPages.add(pt);
                 }
-        }
+        } sc.close();
     
     } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }        
+        }      
  } 
         /**
          * 
