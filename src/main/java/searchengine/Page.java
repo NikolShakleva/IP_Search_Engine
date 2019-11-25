@@ -24,12 +24,12 @@ public class Page{
      * 
      * 
      */
-    public boolean check(String input){
+    /*public boolean check(String input){
         if (words.contains(input)){
             this.relevance++;
             return true;   
         } else return false;
-       }
+       }*/
        /**
         * 
         * @return, an ArrayList with words contained in the page
@@ -55,7 +55,7 @@ public class Page{
          * 
          * @return, the pages' relevance as an int
          */
-        public int getRelevance()   {
+        /*public int getRelevance()   {
             return this.relevance;
-        }
+        }*/
 }
