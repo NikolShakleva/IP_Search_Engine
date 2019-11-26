@@ -29,42 +29,32 @@ public class FileReader {
     public void readFile(String filename)   {        
         try {
             Scanner sc = new Scanner(new File(filename));
-            String pageURL = "";
-            String title = "";
-            String pageUrl = "";
             String line = sc.nextLine();
             while (sc.hasNextLine()){
-                ArrayList<String> words = new ArrayList<>();
-                if(line.startsWith("*PAGE")) {
-                    pageUrl = line;
-
-                } else {
-                    pageUrl = pageURL;
-                }
-                    if (sc.hasNextLine()) {
-                        line = sc.nextLine();
-                        title = line;
-                    }
-                    
-                while (sc.hasNextLine()){
-                    line = sc.nextLine();
-                    if (line.startsWith("*")) {
-                        pageURL = line;
-                        break;
-                        } else {
-                    words.add(line);
-                        }
-                } 
-                Page pt = new Page(pageUrl,title, words);
-                //if(words.size() >= 1) {
-                allPages.add(pt);
-                //}
-        } sc.close();
-    
+                    ArrayList<String> words = new ArrayList<>();
+                    if(line.startsWith("*PAGE")) {
+                        String pageUrl = line;
+                        String title = sc.nextLine();
+                        while (sc.hasNextLine()){
+                             String word = sc.nextLine();
+                             if(!word.startsWith("*PAGE")){
+                                    words.add(word);
+                             } else {
+                                 line = word;
+                                 break;
+                             }
+                            }
+                            if (!words.isEmpty()) {
+                                Page pt = new Page(pageUrl,title,words);
+                                allPages.add(pt); 
+                            }
+                    } 
+                }     
     } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }      
- } 
+        }    
+    }  
+ 
         /**
          * 
          * 
@@ -74,3 +64,4 @@ public class FileReader {
             return allPages;
         }
     }
+    
