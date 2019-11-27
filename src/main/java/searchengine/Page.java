@@ -11,11 +11,15 @@ import java.util.*;
 public class Page{
     private String url;
     private String title;
+    private ArrayList<String> words;
 
     public Page(String pageUrl, String pageTitle){
 
         this.title = pageTitle;
         this.url = pageUrl;
+    }
+    public void replaceWords(List list) {
+        words.addAll(list);
     }
 
        /**

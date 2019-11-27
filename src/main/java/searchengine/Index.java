@@ -12,7 +12,7 @@ public class Index {
 
     public Index(Map<String, ArrayList<Page>> wordsToMap){
 
-        this.wordsToMap = wordsToMap;
+        this.wordsToMap = new HashMap<>(wordsToMap);
         //this.pages = fromReader;
     }
     /**

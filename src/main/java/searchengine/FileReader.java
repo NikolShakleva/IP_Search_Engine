@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,9 +18,11 @@ import java.util.Scanner;
 public class FileReader {
 
     private Map<String, ArrayList<Page>> wordsToMap;
+    private List<Page> allPages;
 
     public FileReader(String filename)  {
         wordsToMap = new HashMap<>();
+        allPages = new ArrayList<>();
         readFile(filename);
     }
     /**
@@ -64,13 +67,59 @@ public class FileReader {
             sc.close();
       }       
     }  
+        /**
+     * Reading the file given from the webserver and creates pages that are added to an arraylist
+     * 
+     * @param filename, filename of text file with websites containing url, title and words
+     */
+    public void readFileL(String filename)   {     
+        Scanner sc = null;
+        try {
+            sc = new Scanner(new File(filename));
+            String line = sc.nextLine();
+            while (sc.hasNextLine()){
+                    ArrayList<String> words = new ArrayList<>();
+                    if(line.startsWith("*PAGE")) {
+                        String pageUrl = line;
+                        String title = sc.nextLine();
+                        while (sc.hasNextLine()){
+                             String word = sc.nextLine();
+                             if(!word.startsWith("*PAGE")){
+                                    words.add(word);
+                             } else {
+                                 line = word;
+                                 break;
+                             }
+                            }
+                            if (!words.isEmpty()) {
+                                Page pt = new Page(pageUrl,title);
+                                pt.replaceWords(words);
+                                allPages.add(pt); 
+                            }
+                    } else {
+                        line = "Error";
+                    }
+                }     
+    } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }    finally {
+            sc.close();
+      }       
+    }  
  
+        /**
+         * 
+         * @return, map that holds keywords words to list og pages containging keyword
+         */
+        public Map<String, ArrayList<Page>> getAllPages()    {
+            return wordsToMap;
+        }
         /**
          * 
          * 
          * @return, ArrayList with page objects
          */
-        public Map<String, ArrayList<Page>> getAllPages()    {
-            return wordsToMap;
+        public List<Page> getAllPagesList() {
+            return allPages;
         }
     }
