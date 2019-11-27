@@ -7,10 +7,10 @@ import java.util.*;
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24
  */
-public class Library {
+public class Index {
     private Map<String, ArrayList<Page>> wordsToMap;
 
-    public Library(Map<String, ArrayList<Page>> wordsToMap){
+    public Index(Map<String, ArrayList<Page>> wordsToMap){
 
         this.wordsToMap = wordsToMap;
         //this.pages = fromReader;

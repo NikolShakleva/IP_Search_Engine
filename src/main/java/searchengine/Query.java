@@ -11,11 +11,11 @@ import java.util.*;
 public class Query {
    // private ArrayList<String> wrongWords;
     private ArrayList<Page> relevantPages;
-    private Library library;
+    private Index index;
 
-    public Query(String input, Library library){
-        this.library = library;
-        relevantPages = library.matchingPages(input);
+    public Query(String input, Index index){
+        this.index = index;
+        relevantPages = index.matchingPages(input);
        
     }
     /**

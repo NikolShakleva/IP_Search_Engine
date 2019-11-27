@@ -25,12 +25,12 @@ public class WebServer {
     static final Charset CHARSET = StandardCharsets.UTF_8;
   
     HttpServer server;
-    Library library;
+    Index index;
     FileReader fileReader;
 
        WebServer(int port, String filename) throws IOException {
        fileReader = new FileReader(filename);                             
-       library = new Library(fileReader.getAllPages());                   
+       index = new Index(fileReader.getAllPages());                   
 
 
       server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
@@ -71,7 +71,7 @@ public class WebServer {
      */
     public void search(HttpExchange io) {  
         var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
-        var query = new Query(searchTerm, library);                       
+        var query = new Query(searchTerm, index);                       
         var correctPages = query.getCorrectPages();  
                                                                            
 
