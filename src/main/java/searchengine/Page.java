@@ -9,34 +9,15 @@ import java.util.*;
  * 
  */
 public class Page{
-    private int relevance;
-    private ArrayList<String> words;
     private String url;
     private String title;
 
-    public Page(String pageUrl, String pageTitle, ArrayList<String> pageWords){
-        this.words = pageWords;
+    public Page(String pageUrl, String pageTitle){
+
         this.title = pageTitle;
         this.url = pageUrl;
-        relevance = 0;
     }
-    /**
-     * 
-     * 
-     */
-    /*public boolean check(String input){
-        if (words.contains(input)){
-            this.relevance++;
-            return true;   
-        } else return false;
-       }*/
-       /**
-        * 
-        * @return, an ArrayList with words contained in the page
-        */
-        public ArrayList<String> getWords()  {
-           return words;
-       }
+
        /**
         * 
         * @return, the pages' URL as a String
@@ -51,11 +32,5 @@ public class Page{
         public String getTitle()    {
             return this.title;
         }
-        /**
-         * 
-         * @return, the pages' relevance as an int
-         */
-        /*public int getRelevance()   {
-            return this.relevance;
-        }*/
+
 }

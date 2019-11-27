@@ -3,6 +3,8 @@ package searchengine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -14,45 +16,48 @@ import java.util.Scanner;
  */
 public class FileReader {
 
-    private ArrayList<Page> allPages;
+    private Map<String, ArrayList<Page>> wordsToMap;
 
-    public FileReader(String filename)
-    {
-        allPages = new ArrayList<Page>();
+    public FileReader(String filename)  {
+        wordsToMap = new HashMap<>();
         readFile(filename);
     }
     /**
-     * Reading the file given from the webserver and creates pages that are added to an arraylist
+     * Reading the file given from the webserver and creates pages that are added to an Map with the key(word) to an ArrayList with pages containing that word.
      * 
-     * @param filename, filename of text file with websites containing url, title and words
+     * @param filename, filename of text file with websites containing url and title
      */
     public void readFile(String filename)   {     
         Scanner sc = null;
         try {
             sc = new Scanner(new File(filename));
             String line = sc.nextLine();
-            while (sc.hasNextLine()){
-                    ArrayList<String> words = new ArrayList<>();
-                    if(line.startsWith("*PAGE")) {
+            while (sc.hasNextLine())    {
+                if(line.startsWith("*PAGE"))    {
                         String pageUrl = line;
                         String title = sc.nextLine();
+                        Page pt = new Page(pageUrl,title);
+
                         while (sc.hasNextLine()){
                              String word = sc.nextLine();
-                             if(!word.startsWith("*PAGE")){
-                                    words.add(word);
-                             } else {
+                             if(!word.startsWith("*PAGE") && !wordsToMap.containsKey(word)){
+                                 var list = new ArrayList<Page>();
+                                 list.add(pt);
+                                    wordsToMap.put(word, list);
+                             }
+                             else if(!word.startsWith("*PAGE") && wordsToMap.containsKey(word)) {
+                                var list = wordsToMap.get(word);
+                                list.add(pt);
+                             } 
+                             else {
                                  line = word;
                                  break;
                              }
-                            }
-                            if (!words.isEmpty()) {
-                                Page pt = new Page(pageUrl,title,words);
-                                allPages.add(pt); 
-                            }
-                    } else {
-                        line = "Error";
+                        }
+                } else {
+                    line = "Error";
                     }
-                }     
+                }    
     } catch (FileNotFoundException e) {
             e.printStackTrace();
         }    finally {
@@ -65,7 +70,7 @@ public class FileReader {
          * 
          * @return, ArrayList with page objects
          */
-        public ArrayList<Page> getAllPagesList()    {
-            return allPages;
+        public Map<String, ArrayList<Page>> getAllPages()    {
+            return wordsToMap;
         }
     }

@@ -34,7 +34,7 @@ public class FileReaderTest {
     // assume that if the page object has no title or words is not aded to the list of PageObjects
     public void Websites_With_No_Words_OR_No_Title_Are_Ommited(){
         filereader = new FileReader("NoWordsORNoTitle.txt");
-        int result = filereader.getAllPagesList().size();
+        int result = filereader.getAllPages().size();
         assertEquals(0, result);
     }
 
@@ -52,14 +52,14 @@ public class FileReaderTest {
     @Test
     public void ReadFile_Assumes_That_If_A_Line_Starts_With_A_StarPage_A_New_Page_Object_Is_Created(){
         filereader = new FileReader("test-file.txt");
-        int result = filereader.getAllPagesList().size();
+        int result = filereader.getAllPages().size();
         assertEquals(2, result);
     }
 
     @Test 
     public void ReadFiles_Assume_That_Only_Lines_Without_A_StarPage_Will_Be_Added_To_The_List_Of_Words(){
         filereader = new FileReader("test-file.txt");
-        boolean result = filereader.getAllPagesList().get(0).getWords().contains("*");
+        boolean result = filereader.getAllPages().get(0).getWords().contains("*");
         assertFalse(result);
     }
 

@@ -15,7 +15,6 @@ public class Responder{
     public Responder(ArrayList<Page> correctPages){
         this.correctPages = new ArrayList<Page>(correctPages);
     }
-    
     /**
      * 
      * @return, an ArrayList with pages formatted with URL and Title for the server to display

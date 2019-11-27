@@ -8,10 +8,11 @@ import java.util.*;
  * @version 2019.11.24
  */
 public class Library {
-    private ArrayList<Page> allPages;
+    private Map<String, ArrayList<Page>> wordsToMap;
 
-    public Library(ArrayList<Page> allPages){
-        this.allPages = new ArrayList<Page>(allPages);
+    public Library(Map<String, ArrayList<Page>> wordsToMap){
+
+        this.wordsToMap = wordsToMap;
         //this.pages = fromReader;
     }
     /**
@@ -23,10 +24,7 @@ public class Library {
      */
     public ArrayList<Page> matchingPages(String input){
         ArrayList<Page> matchingPages = new ArrayList<Page>();
-        for (Page page: allPages){
-            if(page.getWords().contains(input))
-                matchingPages.add(page);
-            }
+        matchingPages = wordsToMap.get(input);
             
         return matchingPages;
     }
