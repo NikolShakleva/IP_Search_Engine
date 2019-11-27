@@ -13,15 +13,15 @@ public class Page{
     private String title;
     private ArrayList<String> words;
 
-    public Page(String pageUrl, String pageTitle){
-
+    public Page(String pageUrl, String pageTitle, ArrayList<String> words){
         this.title = pageTitle;
         this.url = pageUrl;
+        this.words = words;
+
     }
-    public void replaceWords(List list) {
+    public void replaceWords(ArrayList<String> list) {
         words.addAll(list);
     }
-
        /**
         * 
         * @return, the pages' URL as a String

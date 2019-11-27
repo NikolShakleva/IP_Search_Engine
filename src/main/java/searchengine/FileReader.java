@@ -3,8 +3,6 @@ package searchengine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -16,68 +14,19 @@ import java.util.Scanner;
  */
 public class FileReader {
 
-    private Map<String, ArrayList<Page>> wordsToMap;
     private ArrayList<Page> allPages;
 
-    public FileReader(String filename, List list)  {
-        wordsToMap = new HashMap<>();
+    public FileReader(String filename)  {
         allPages = new ArrayList<>();
         readFile(filename);
     }
-    public FileReader(String filname, Map map)
     /**
-     * Reading the file given from the webserver and creates pages that are added to an Map with the key(word) to an ArrayList with pages containing that word.
-     * 
-     * @param filename, filename of text file with websites containing url and title
-     */
-    public void readFile(String filename)   {     
-        Scanner sc = null;
-        try {
-            sc = new Scanner(new File(filename));
-            String line = sc.nextLine();
-            while (sc.hasNextLine())    {
-                if(line.startsWith("*PAGE"))    {
-                        String pageUrl = line;
-                        String title = sc.nextLine();
-                        Page pt = new Page(pageUrl,title);
-
-                        while (sc.hasNextLine()){
-                             String word = sc.nextLine();
-                             if(!word.startsWith("*PAGE") && !wordsToMap.containsKey(word)){
-                                 var list = new ArrayList<Page>();
-                                 list.add(pt);
-                                    wordsToMap.put(word, list);
-                             }
-                             else if(!word.startsWith("*PAGE") && wordsToMap.containsKey(word)) {
-                                var list = wordsToMap.get(word);
-                                if(!list.contains(pt))   {
-                                    list.add(pt);                              
-                             } 
-                             else {
-                                 line = word;
-                                 break;
-                             }
-                            }
-                        }
-                } else {
-                    line = "Error";
-                    }
-                }    
-    } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }    finally {
-            sc.close();
-      }       
-    }  
-        /**
      * Reading the file given from the webserver and creates pages that are added to an arraylist
      * 
      * @param filename, filename of text file with websites containing url, title and words
      */
-    public void readFileL(String filename)   {     
-        Scanner sc = null;
-        try {
-            sc = new Scanner(new File(filename));
+    public void readFile(String filename)   {     
+        try(Scanner sc = new Scanner(new File(filename));) {
             String line = sc.nextLine();
             while (sc.hasNextLine()){
                     ArrayList<String> words = new ArrayList<>();
@@ -94,8 +43,7 @@ public class FileReader {
                              }
                             }
                             if (!words.isEmpty()) {
-                                Page pt = new Page(pageUrl,title);
-                                pt.replaceWords(words);
+                                Page pt = new Page(pageUrl,title, words);
                                 allPages.add(pt); 
                             }
                     } else {
@@ -103,25 +51,14 @@ public class FileReader {
                     }
                 }     
     } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }    finally {
-            sc.close();
-      }       
-    }  
- 
-        /**
-         * 
-         * @return, map that holds keywords words to list og pages containging keyword
-         */
-        public Map<String, ArrayList<Page>> getAllPages()    {
-            return wordsToMap;
-        }
+            e.printStackTrace();   
+    }  }
         /**
          * 
          * 
          * @return, ArrayList with page objects
          */
-        public ArrayList<Page> getAllPagesList() {
+        public ArrayList<Page> getAllPages() {
             return allPages;
         }
     }
