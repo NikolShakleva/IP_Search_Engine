@@ -48,7 +48,9 @@ public class FileReader {
                                 Page pt = new Page(pageUrl,title,words);
                                 allPages.add(pt); 
                             }
-                    } 
+                    } else {
+                        line = "Error";
+                    }
                 }     
     } catch (FileNotFoundException e) {
             e.printStackTrace();

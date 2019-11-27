@@ -1,6 +1,0 @@
-PAGE:http://www.exampleA.com/
-Arhus
-words 
-again
-new
-oneMore

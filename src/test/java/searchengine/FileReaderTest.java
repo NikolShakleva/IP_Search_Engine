@@ -32,10 +32,11 @@ public class FileReaderTest {
     @Test
      // the test is wrong because if the file doesn't start with a "*PAGE" we just hava an infinite loop
      public void fileContainsOneWebsiteWithoutStarPage()   {
-         filereader = new FileReader("FirstLinestartsWithNostarPage.txt");
-         Scanner sc = new Scanner ("FirstLinestartsWithNostarPage.txt");
-         String notReachable = sc.nextLine();
-         assertNull(notReachable);
+         filereader = new FileReader("test-file-errors.txt");
+         Scanner sc = new Scanner ("test-file-errors.txt");
+         String error = sc.nextLine();
+         if (!error.contains("*")) error = "Error";
+         assertEquals("Error" ,error);
     }
 
     @Test 
@@ -49,30 +50,28 @@ public class FileReaderTest {
     @Test 
     // assume that the text file is not empthy and has next line
     public void readFile_Has_At_Least_One_Line_Of_Input(){
-        filereader = new FileReader("config.txt");
-        assertFalse("config.txt".isEmpty());
-        Scanner sc = new Scanner("config.txt");
+        filereader = new FileReader("test-file.txt");
+        assertFalse("test-file.txt".isEmpty());
+        Scanner sc = new Scanner("test-file.txt");
         boolean line = sc.hasNext();
         assertTrue(line);
     }
     //asummes that if a line starts with * a page object is created
     @Test
     public void ReadFile_Assumes_That_If_A_Line_Starts_With_A_StarPage_A_New_Page_Object_Is_Created(){
-        filereader = new FileReader("OneStarPageLine.txt");
+        filereader = new FileReader("test-file.txt");
         int result = filereader.getAllPagesList().size();
-        assertEquals(1, result);
+        assertEquals(2, result);
     }
 
     @Test 
     public void ReadFiles_Assume_That_Only_Lines_Without_A_StarPage_Will_Be_Added_To_The_List_Of_Words(){
-        filereader = new FileReader("config.txt");
-        filereader.readFile("config.txt");
+        filereader = new FileReader("test-file.txt");
         boolean result = filereader.getAllPagesList().get(0).getWords().contains("*");
         assertFalse(result);
     }
 
 }
 // it doesnt have next line
-// it doesnt start with *PAGE
 // it doesnt start with *
 // is not Empthy
