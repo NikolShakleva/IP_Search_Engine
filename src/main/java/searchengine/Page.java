@@ -37,4 +37,8 @@ public class Page{
             return this.title;
         }
 
+        public ArrayList<String> getWords() {
+            return words;
+        }
+
 }

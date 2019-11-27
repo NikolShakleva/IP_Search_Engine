@@ -30,7 +30,7 @@ public class WebServer {
 
        WebServer(int port, String filename) throws IOException {
        fileReader = new FileReader(filename);                             
-       index = new Index(fileReader.getAllPages());                   
+       index = new Index(fileReader.getAllPages(), fileReader.getAllPagesList());                   
 
 
       server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server

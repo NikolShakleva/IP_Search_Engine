@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,7 +17,7 @@ import java.util.Scanner;
 public class FileReader {
 
     private Map<String, ArrayList<Page>> wordsToMap;
-    private List<Page> allPages;
+    private ArrayList<Page> allPages;
 
     public FileReader(String filename)  {
         wordsToMap = new HashMap<>();
@@ -50,12 +49,14 @@ public class FileReader {
                              }
                              else if(!word.startsWith("*PAGE") && wordsToMap.containsKey(word)) {
                                 var list = wordsToMap.get(word);
-                                list.add(pt);
+                                if(!list.contains(pt))   {
+                                    list.add(pt);                              
                              } 
                              else {
                                  line = word;
                                  break;
                              }
+                            }
                         }
                 } else {
                     line = "Error";
@@ -119,7 +120,7 @@ public class FileReader {
          * 
          * @return, ArrayList with page objects
          */
-        public List<Page> getAllPagesList() {
+        public ArrayList<Page> getAllPagesList() {
             return allPages;
         }
     }

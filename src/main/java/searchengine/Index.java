@@ -9,10 +9,12 @@ import java.util.*;
  */
 public class Index {
     private Map<String, ArrayList<Page>> wordsToMap;
+    private List<Page> allPages;
 
-    public Index(Map<String, ArrayList<Page>> wordsToMap){
+    public Index(Map<String, ArrayList<Page>> wordsToMap, ArrayList<Page> allPages){
 
         this.wordsToMap = new HashMap<>(wordsToMap);
+        this.allPages = new ArrayList<>(allPages);
         //this.pages = fromReader;
     }
     /**
@@ -22,11 +24,19 @@ public class Index {
      * @param input, searchTerm from user
      * @return an ArrayList with matching pages to the serchTerm
      */
-    public ArrayList<Page> matchingPages(String input){
+    public ArrayList<Page> matchingPagesMap(String input){
         ArrayList<Page> matchingPages = new ArrayList<Page>();
         matchingPages = wordsToMap.get(input);
             
         return matchingPages;
+    }
+
+    public ArrayList<Page> matchingPagesList (String input) {
+        ArrayList<Page> matchingPages = new ArrayList<Page>();
+        for(Page page : allPages)   {
+
+            return matchingPages;
+        }
     }
     /**
      * Adds Pages to the Library
