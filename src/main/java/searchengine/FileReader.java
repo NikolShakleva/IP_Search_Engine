@@ -27,9 +27,9 @@ public class FileReader {
      * @param filename, filename of text file with websites containing url, title and words
      */
     public void readFile(String filename)   {     
-           
+        Scanner sc = null;
         try {
-            Scanner sc = new Scanner(new File(filename));
+            sc = new Scanner(new File(filename));
             String line = sc.nextLine();
             while (sc.hasNextLine()){
                     ArrayList<String> words = new ArrayList<>();
@@ -55,7 +55,9 @@ public class FileReader {
                 }     
     } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }    
+        }    finally {
+            sc.close();
+      }       
     }  
  
         /**
