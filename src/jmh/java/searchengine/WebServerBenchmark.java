@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.openjdk.jmh.annotations.Benchmark;
 //import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -43,9 +44,9 @@ public class WebServerBenchmark {
         }
     }
     
-   /* @Benchmark
+    @Benchmark
     public List<List<String>> measureAvgTime() throws InterruptedException {
         // Probably not a good idea to search for the same thing all the time... oh well
         return server.search("denmark");
-    }*/
+    }
 }
