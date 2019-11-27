@@ -1,19 +1,9 @@
 package searchengine;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.NotLinkException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -36,6 +26,7 @@ public class FileReaderTest {
          Scanner sc = new Scanner ("test-file-errors.txt");
          String error = sc.nextLine();
          if (!error.contains("*")) error = "Error";
+         sc.close();
          assertEquals("Error" ,error);
     }
 
@@ -54,6 +45,7 @@ public class FileReaderTest {
         assertFalse("test-file.txt".isEmpty());
         Scanner sc = new Scanner("test-file.txt");
         boolean line = sc.hasNext();
+        sc.close();
         assertTrue(line);
     }
     //asummes that if a line starts with * a page object is created
