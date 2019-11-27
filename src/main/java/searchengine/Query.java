@@ -15,7 +15,7 @@ public class Query {
 
     public Query(String input, Index index){
         this.index = index;
-        relevantPages = index.matchingPages(input);
+        relevantPages = index.matchingPagesMap(input);
        
     }
     /**

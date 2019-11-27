@@ -19,11 +19,12 @@ public class FileReader {
     private Map<String, ArrayList<Page>> wordsToMap;
     private ArrayList<Page> allPages;
 
-    public FileReader(String filename)  {
+    public FileReader(String filename, List list)  {
         wordsToMap = new HashMap<>();
         allPages = new ArrayList<>();
         readFile(filename);
     }
+    public FileReader(String filname, Map map)
     /**
      * Reading the file given from the webserver and creates pages that are added to an Map with the key(word) to an ArrayList with pages containing that word.
      * 

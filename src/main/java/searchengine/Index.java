@@ -17,6 +17,7 @@ public class Index {
         this.allPages = new ArrayList<>(allPages);
         //this.pages = fromReader;
     }
+    
     /**
      * Matches the searchTerm to all the pages stored in the Library
      * and creates a List of Matching Pages.
@@ -33,10 +34,13 @@ public class Index {
 
     public ArrayList<Page> matchingPagesList (String input) {
         ArrayList<Page> matchingPages = new ArrayList<Page>();
-        for(Page page : allPages)   {
-
-            return matchingPages;
-        }
+        for (Page page: allPages){
+            if(page.getWords().contains(input))
+                matchingPages.add(page);
+            }
+            
+        return matchingPages;
+    }
     }
     /**
      * Adds Pages to the Library

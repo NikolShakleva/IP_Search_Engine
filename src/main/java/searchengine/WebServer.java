@@ -29,7 +29,7 @@ public class WebServer {
     FileReader fileReader;
 
        WebServer(int port, String filename) throws IOException {
-       fileReader = new FileReader(filename);                             
+       fileReader = new FileReaderHashMap(filename);                             
        index = new Index(fileReader.getAllPages(), fileReader.getAllPagesList());                   
 
 
