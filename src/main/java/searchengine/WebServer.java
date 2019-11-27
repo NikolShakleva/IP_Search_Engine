@@ -116,6 +116,9 @@ public class WebServer {
           io.close();
         }
       }
+      public Index getIndex() {
+        return index;
+      }
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();

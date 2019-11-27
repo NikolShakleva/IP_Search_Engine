@@ -24,6 +24,8 @@ public class WebServerBenchmark {
     WebServer server;
     List<String> hitSearchTerms;
     List<String> missSearchTerms;
+    private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", "sand", "word", "bumblebee", "honeybee", "and", "or", "random", "asian",
+                                "done", "with", "task", "four", "conceive", "network", "mess", "linger", };
 
     @Param({"data/enwiki-tiny.txt", "data/enwiki-small.txt", "data/enwiki-medium.txt", "data/enwiki-large.txt"})
     String filename;
@@ -45,8 +47,10 @@ public class WebServerBenchmark {
     }
     
     @Benchmark
-    public List<List<String>> measureAvgTime() throws InterruptedException {
+    public void measureAvgTime() throws InterruptedException {
         // Probably not a good idea to search for the same thing all the time... oh well
-        return server.search("denmark");
+        for(int i = 0 ; i < 50 ; i++) {
+        server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
+        }
     }
 }
