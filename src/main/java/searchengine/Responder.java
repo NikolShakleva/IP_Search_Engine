@@ -25,7 +25,7 @@ public class Responder{
             String url = page.getUrl();
             String title = page.getTitle();
             response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\"}",
-                                 url.substring(6), title));
+                                 url, title));
         } return response;
     }
 }
