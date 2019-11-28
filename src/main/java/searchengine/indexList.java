@@ -25,5 +25,9 @@ public class IndexList implements Index    {
         return allPages;
     }
     
+    public ArrayList<Page> getPage()
+{
+    return allPages;
+}
     
 }
