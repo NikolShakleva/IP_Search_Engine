@@ -25,14 +25,14 @@ public class WebServer {
     static final Charset CHARSET = StandardCharsets.UTF_8;
   
     HttpServer server;
-    //IndexList index;
+    //IndexListArray index;
     //IndexHash index;
     IndexTree index;
     FileReader fileReader;
 
        WebServer(int port, String filename) throws IOException {
        fileReader = new FileReader(filename);                             
-      // index = new IndexList(fileReader.getAllPages()); 
+      // index = new IndexListArray(fileReader.getAllPages()); 
       // index = new IndexHash(fileReader.getAllPages());     
        index = new IndexTree(fileReader.getAllPages());      
                 

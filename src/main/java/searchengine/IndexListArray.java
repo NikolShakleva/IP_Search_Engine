@@ -5,10 +5,10 @@ import java.util.ArrayList;
 /**
  * indexList
  */
-public class IndexList implements Index    {
+public class IndexListArray implements Index    {
     private ArrayList<Page> allPages;
 
-    public IndexList(ArrayList<Page> allPages)  {
+    public IndexListArray(ArrayList<Page> allPages)  {
         this.allPages = allPages;
         
     }
@@ -25,9 +25,5 @@ public class IndexList implements Index    {
         return allPages;
     }
     
-    public ArrayList<Page> getPage()
-{
-    return allPages;
-}
     
 }
