@@ -44,13 +44,15 @@ public class WebServerBenchmark {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }//randomWords[(int) (Math.random() * randomWords.length)]
     
     @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.NANOSECONDS)
     public void measureAvgTime() throws InterruptedException {
         // Probably not a good idea to search for the same thing all the time... oh well
-        for(int i = 0 ; i < 50 ; i++) {
-        server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
-        }
+        //for(int i = 0 ; i < 50 ; i++) {
+        server.getIndex().matchingPages("denmark");
+        
     }
 }
