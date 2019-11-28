@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
-//import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Mode;
@@ -24,9 +23,11 @@ public class WebServerBenchmark {
     WebServer server;
     List<String> hitSearchTerms;
     List<String> missSearchTerms;
-    private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", "sand", "word", "bumblebee", "honeybee", "and", "or", "random", "asian",
-                                "done", "with", "task", "four", "conceive", "network", "mess", "linger", };
-
+    private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", 
+                                    "sand", "word", "bumblebee", "honeybee", "and", 
+                                    "or", "random", "asian", "done", "with", 
+                                    "task", "four", "conceive", "network", "mess" };
+ 
     @Param({"data/enwiki-tiny.txt", "data/enwiki-small.txt", "data/enwiki-medium.txt", "data/enwiki-large.txt"})
     String filename;
 
@@ -44,15 +45,12 @@ public class WebServerBenchmark {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }//randomWords[(int) (Math.random() * randomWords.length)]
-    
-    @Benchmark
-    @BenchmarkMode(Mode.AverageTime)
-    @OutputTimeUnit(TimeUnit.NANOSECONDS)
+    }
+
+    @Benchmark 
     public void measureAvgTime() throws InterruptedException {
-        // Probably not a good idea to search for the same thing all the time... oh well
-        //for(int i = 0 ; i < 50 ; i++) {
-        server.getIndex().matchingPages("denmark");
+        
+        server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
         
     }
 }
