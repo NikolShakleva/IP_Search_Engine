@@ -31,7 +31,7 @@ public class FileReader {
             while (sc.hasNextLine()){
                     ArrayList<String> words = new ArrayList<>();
                     if(line.startsWith("*PAGE")) {
-                        String pageUrl = line;
+                        String pageUrl = line.replace("*PAGE:", "");
                         String title = sc.nextLine();
                         while (sc.hasNextLine()){
                              String word = sc.nextLine();
