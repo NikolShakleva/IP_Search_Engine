@@ -47,4 +47,9 @@ public class IndexTree implements Index {
     public ArrayList<Page> getAllPages()  {
         return allPages;
     }
+
+    // public Set<String> returnKeySet()
+    // {
+    //     return wordsToPages.keySet();
+    // }
 }

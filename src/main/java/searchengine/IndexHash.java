@@ -46,4 +46,9 @@ public class IndexHash implements Index    {
     public ArrayList<Page> getAllPages()  {
         return allPages;
     }
+
+    // public Set<String> returnKeySet()
+    // {
+    //     return wordsToPages.keySet();
+    // }
 }

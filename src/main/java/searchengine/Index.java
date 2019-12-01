@@ -11,5 +11,5 @@ public interface Index {
 
     public ArrayList<Page> matchingPages(String input);
     public ArrayList<Page> getAllPages();
-    
+    //public Set<String> returnKeySet();
 }

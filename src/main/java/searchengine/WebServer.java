@@ -130,7 +130,7 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename, "list");
+        new WebServer(PORT, filename, "tree");
       
        
       }
