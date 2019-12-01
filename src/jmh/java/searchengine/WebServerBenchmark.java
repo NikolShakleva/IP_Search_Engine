@@ -31,13 +31,16 @@ public class WebServerBenchmark {
     @Param({"data/enwiki-tiny.txt", "data/enwiki-small.txt", "data/enwiki-medium.txt", "data/enwiki-large.txt"})
     String filename;
 
+    @Param({"list", "hash", "map"})
+    String ix;
+
     @Setup(Level.Trial)
     public void setup() {
         try {
             var rnd = new Random();
             while (server == null) {
                 try {
-                    server = new WebServer(rnd.nextInt(60000) + 1024, filename);
+                    server = new WebServer(rnd.nextInt(60000) + 1024, filename, ix);
                 } catch (BindException e) {
                     // port in use. Try again
                 }

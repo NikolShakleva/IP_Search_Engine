@@ -25,16 +25,24 @@ public class WebServer {
     static final Charset CHARSET = StandardCharsets.UTF_8;
   
     HttpServer server;
-    //IndexListArray index;
-    //IndexHash index;
-    IndexTree index;
     FileReader fileReader;
+    Index index;
+  
 
-       WebServer(int port, String filename) throws IOException {
-       fileReader = new FileReader(filename);                             
-      // index = new IndexListArray(fileReader.getAllPages()); 
-      // index = new IndexHash(fileReader.getAllPages());     
-       index = new IndexTree(fileReader.getAllPages());      
+       WebServer(int port, String filename, String ix) throws IOException {
+       fileReader = new FileReader(filename); 
+       if(ix.equals("list)"))
+       {   
+        index = new IndexListArray(fileReader.getAllPages());                         
+       }
+       else if(ix.equals("hash"))
+       {
+        index = new IndexHash(fileReader.getAllPages());     
+       }  
+       else 
+       {
+        index = new IndexTree(fileReader.getAllPages());   
+       }    
                 
 
 
@@ -122,7 +130,7 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename);
+        new WebServer(PORT, filename, "list");
       
        
       }

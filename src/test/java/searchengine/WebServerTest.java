@@ -27,7 +27,7 @@ class WebServerTest {
             var rnd = new Random();
             while (server == null) {
                 try {
-                    server = new WebServer(rnd.nextInt(60000) + 1024, "data/test-file.txt");
+                    server = new WebServer(rnd.nextInt(60000) + 1024, "data/test-file.txt", "list");
                 } catch (BindException e) {
                     // port in use. Try again
                 }
