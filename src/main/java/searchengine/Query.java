@@ -16,7 +16,7 @@ public class Query {
 
     public Query(String input, Index index){
         this.index = index;
-        relevantPages = getKeyPages(input);
+        relevantPages = getKP(input);
         //this.filename = input;
        
     }
@@ -36,23 +36,16 @@ public class Query {
 
      public ArrayList<Page> getKeyPages(String input)
      {
-
-       // ArrayList<String> keyset = returnMap()
-
         
         ArrayList<Page> arr = new ArrayList<>();
         ArrayList<Page> result = new ArrayList<>();
         String[] array = input.split("%20");
 
-        
         for(String x : array)
         {
             for(Page xxx : index.matchingPages(x))
             {
-            
             arr.add(xxx);
-            
-
             }
         }
         
@@ -63,9 +56,27 @@ public class Query {
             {
                 result.add(x);
             }
-        }
-        
+        } 
         return result;
+     }
+
+     public ArrayList<Page> getKP(String input)
+     {
+         ArrayList<Page> arr = new ArrayList<>();
+         String[] arrOR = input.split("%20OR%20");
+         for(String line : arrOR)
+         {
+           ArrayList<Page> xxx = getKeyPages(line);
+                    for(Page x : xxx)
+                    {
+                        if(!arr.contains(x))
+                        {
+                        arr.add(x);
+                        }
+                    }
+         }
+         return arr;
+         
      }
 
 
