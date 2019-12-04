@@ -34,18 +34,12 @@ public class WebServerBenchmark {
     @Setup(Level.Trial)
     public void setup() {
         fr = new FileReader(filename);
-        if(ix.equals("list)"))
-       {   
-        index = new IndexListArray(fr.getAllPages());                         
-       }
-       else if(ix.equals("hash"))
-       {
-        index = new IndexHash(fr.getAllPages());     
-       }  
-       else if (ix.equals("map"))
-       {
-        index = new IndexTree(fr.getAllPages());   
-       }    
+        if(ix.equals("list"))      index = new IndexListArray(fr.getAllPages());                         
+       
+       else if(ix.equals("hash"))   index = new IndexHash(fr.getAllPages());     
+         
+       else if (ix.equals("map"))   index = new IndexTree(fr.getAllPages());   
+        
     }
 
     @Benchmark 
