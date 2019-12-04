@@ -17,9 +17,7 @@ import org.openjdk.jmh.annotations.State;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class WebServerBenchmark {
-    /*WebServer server;
-    List<String> hitSearchTerms;
-    List<String> missSearchTerms;*/
+
     FileReader fr;
     Index index;
     private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", 
@@ -48,18 +46,6 @@ public class WebServerBenchmark {
        {
         index = new IndexTree(fr.getAllPages());   
        }    
-     /*   try {
-            var rnd = new Random();
-            while (server == null) {
-                try {
-                    server = new WebServer(rnd.nextInt(60000) + 1024, filename, ix);
-                } catch (BindException e) {
-                    // port in use. Try again
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Benchmark 
@@ -69,8 +55,6 @@ public class WebServerBenchmark {
         for(String word : randomWords)  {
         allPages.addAll(index.matchingPages(word));
         
-        } return allPages;
-        //server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
-        
+        } return allPages;       
     }
 }
