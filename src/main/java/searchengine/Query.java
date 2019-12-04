@@ -33,25 +33,25 @@ public class Query {
      *
      * @return, a List with all the matching pages that contain all of the words that the string contains
      */
-
+    //the method below is the helper one for the getKP method
      public ArrayList<Page> getKeyPages(String input)
      {
         
-        ArrayList<Page> arr = new ArrayList<>();
+        ArrayList<Page> arrayOfDesiredPages = new ArrayList<>();
         ArrayList<Page> result = new ArrayList<>();
         String[] array = input.split("%20");
 
         for(String x : array)
         {
-            for(Page xxx : index.matchingPages(x))
+            for(Page arrayOfPages : index.matchingPages(x))
             {
-            arr.add(xxx);
+            arrayOfDesiredPages.add(arrayOfPages);
             }
         }
         
-        for(Page x :arr)
+        for(Page x :arrayOfDesiredPages)
         {
-            int occurences = Collections.frequency(arr, x);
+            int occurences = Collections.frequency(arrayOfDesiredPages, x);
             if(occurences==array.length&&!result.contains(x))
             {
                 result.add(x);
@@ -62,20 +62,20 @@ public class Query {
 
      public ArrayList<Page> getKP(String input)
      {
-         ArrayList<Page> arr = new ArrayList<>();
-         String[] arrOR = input.split("%20OR%20");
-         for(String line : arrOR)
+         ArrayList<Page> arrayOfDesiredPages = new ArrayList<>();
+         String[] arrayOfOR = input.split("%20OR%20");
+         for(String line : arrayOfOR)
          {
-           ArrayList<Page> xxx = getKeyPages(line);
-                    for(Page x : xxx)
+           ArrayList<Page> arrayOfPages = getKeyPages(line);
+                    for(Page x : arrayOfPages)
                     {
-                        if(!arr.contains(x))
+                        if(!arrayOfDesiredPages.contains(x))
                         {
-                        arr.add(x);
+                        arrayOfDesiredPages.add(x);
                         }
                     }
          }
-         return arr;
+         return arrayOfDesiredPages;
          
      }
 

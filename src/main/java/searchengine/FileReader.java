@@ -28,28 +28,37 @@ public class FileReader {
     public void readFile(String filename)   {     
         try(Scanner sc = new Scanner(new File(filename));) {
             String line = sc.nextLine();
-            while (sc.hasNextLine()){
-                    ArrayList<String> words = new ArrayList<>();
-                    if(line.startsWith("*PAGE")) {
+            while (sc.hasNextLine())
+            {
+                ArrayList<String> words = new ArrayList<>();
+                    if(line.startsWith("*PAGE")) 
+                    {
                         String pageUrl = line.replace("*PAGE:", "");
                         String title = sc.nextLine();
-                        while (sc.hasNextLine()){
+                            while (sc.hasNextLine())
+                            {
                              String word = sc.nextLine();
-                             if(!word.startsWith("*PAGE")){
+                             if(!word.startsWith("*PAGE"))
+                                {
                                     words.add(word);
-                             } else {
-                                 line = word;
-                                 break;
-                             }
+                                } 
+                                else 
+                                {
+                                    line = word;
+                                    break;
+                                }
                             }
-                            if (!words.isEmpty()) {
+                            if (!words.isEmpty())
+                            {
                                 Page pt = new Page(pageUrl,title, words);
                                 allPages.add(pt); 
                             }
-                    } else {
+                    } 
+                    else 
+                    {
                         line = "Error";
                     }
-                }     
+            }     
     } catch (FileNotFoundException e) {
             e.printStackTrace();   
     }  }
