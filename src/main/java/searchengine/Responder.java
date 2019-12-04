@@ -1,4 +1,6 @@
 package searchengine;
+import java.util.Comparator;
+import java.util.Collections;
 import java.util.*;
 
 /**
@@ -21,11 +23,21 @@ public class Responder{
      */
     public ArrayList<String> getPageNames(){
         ArrayList<String> response = new ArrayList<>(); 
+        correctPages.sort(Comparator
+        .comparing(Page::getRelevance));
+
+        //
+
+        
         for (Page page: correctPages){
             String url = page.getUrl();
             String title = page.getTitle();
             response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\"}",
-                                 url, title));
+                                 url, title)); 
+            page.resetRelevance();
+            
+
+         
         } return response;
     }
 }

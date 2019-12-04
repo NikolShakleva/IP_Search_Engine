@@ -16,7 +16,7 @@ public class Query {
 
     public Query(String input, Index index){
         this.index = index;
-        relevantPages = getKP(input);
+        relevantPages = getKeyPages(input);
         //this.filename = input;
        
     }
@@ -33,49 +33,58 @@ public class Query {
      *
      * @return, a List with all the matching pages that contain all of the words that the string contains
      */
-    //the method below is the helper one for the getKP method
-     public ArrayList<Page> getKeyPages(String input)
+    //the method below is the helper one for the getKeyPages method
+     public ArrayList<Page> getKeyPagesHelper(String input)
      {
         
-        ArrayList<Page> arrayOfDesiredPages = new ArrayList<>();
+        ArrayList<Page> arrayOfSelectedPages = new ArrayList<>();
         ArrayList<Page> result = new ArrayList<>();
         String[] array = input.split("%20");
 
+        //the loop selects pages that have at least of of the given key word
         for(String x : array)
         {
-            for(Page arrayOfPages : index.matchingPages(x))
+            for(Page item : index.matchingPages(x))
             {
-            arrayOfDesiredPages.add(arrayOfPages);
+            //if(arrayOfSelectedPages!=contain(item))
+            item.increaseRelevance(x);
+            arrayOfSelectedPages.add(item);
             }
         }
-        
-        for(Page x :arrayOfDesiredPages)
+        //the loop selects pages that contain each of the given key word
+        for(Page x :arrayOfSelectedPages)
         {
-            int occurences = Collections.frequency(arrayOfDesiredPages, x);
+            int occurences = Collections.frequency(arrayOfSelectedPages, x);
             if(occurences==array.length&&!result.contains(x))
             {
+                //increase the relevance by the nb of occurences
                 result.add(x);
+            }
+            else
+            {
+                x.resetRelevance();
             }
         } 
         return result;
      }
 
-     public ArrayList<Page> getKP(String input)
+     public ArrayList<Page> getKeyPages(String input)
      {
-         ArrayList<Page> arrayOfDesiredPages = new ArrayList<>();
+         ArrayList<Page> arrayOfSelectedPages1 = new ArrayList<>();
          String[] arrayOfOR = input.split("%20OR%20");
          for(String line : arrayOfOR)
          {
-           ArrayList<Page> arrayOfPages = getKeyPages(line);
+           ArrayList<Page> arrayOfPages = getKeyPagesHelper(line);
                     for(Page x : arrayOfPages)
                     {
-                        if(!arrayOfDesiredPages.contains(x))
+                        if(!arrayOfSelectedPages1.contains(x))
                         {
-                        arrayOfDesiredPages.add(x);
+                        
+                        arrayOfSelectedPages1.add(x);
                         }
                     }
          }
-         return arrayOfDesiredPages;
+         return arrayOfSelectedPages1;
          
      }
 
