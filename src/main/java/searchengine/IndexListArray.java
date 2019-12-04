@@ -1,7 +1,6 @@
 package searchengine;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * indexList
@@ -25,12 +24,5 @@ public class IndexListArray implements Index    {
     public ArrayList<Page> getAllPages()    {
         return allPages;
     }
-
-    // public Set<String> returnKeySet()
-    // {
-    //     keyWords = new Set<String>();
-    //     return keyWords;
-    // }
-    
     
 }
