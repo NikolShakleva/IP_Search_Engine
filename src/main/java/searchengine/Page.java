@@ -12,11 +12,14 @@ public class Page{
     private String url;
     private String title;
     private ArrayList<String> words;
+    private int relevance;
+
 
     public Page(String pageUrl, String pageTitle, ArrayList<String> words){
         this.title = pageTitle;
         this.url = pageUrl;
         this.words = words;
+        relevance = 0;
 
     }
     public void replaceWords(ArrayList<String> list) {
@@ -40,5 +43,25 @@ public class Page{
         public ArrayList<String> getWords() {
             return words;
         }
+
+
+        public void increaseRelevance(String x)
+        {
+            int occurences = Collections.frequency(words, x);
+            this.relevance+=occurences;
+        }
+
+        public int getRelevance()
+        {
+            return relevance;
+        }
+
+        public void resetRelevance()
+        {
+            this.relevance = 0;
+        }
+
+
+
 
 }
