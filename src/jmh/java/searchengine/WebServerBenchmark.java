@@ -2,6 +2,7 @@ package searchengine;
 
 import java.io.IOException;
 import java.net.BindException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -20,13 +21,15 @@ import org.openjdk.jmh.annotations.State;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class WebServerBenchmark {
-    WebServer server;
+    /*WebServer server;
     List<String> hitSearchTerms;
-    List<String> missSearchTerms;
+    List<String> missSearchTerms;*/
+    FileReader fr;
+    Index index;
     private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", 
-                                    "sand", "word", "bumblebee", "honeybee", "and", 
+                                    "sand", "okrjhsuer", "bumblebee", "honeybee", "and", 
                                     "or", "random", "asian", "done", "with", 
-                                    "task", "four", "conceive", "network", "mess" };
+                                    "task", "aaabbbcccc", "conceive", "network", "mess" };
  
     @Param({"data/enwiki-tiny.txt", "data/enwiki-small.txt", "data/enwiki-medium.txt", "data/enwiki-large.txt"})
     String filename;
@@ -36,7 +39,20 @@ public class WebServerBenchmark {
 
     @Setup(Level.Trial)
     public void setup() {
-        try {
+        fr = new FileReader(filename);
+        if(ix.equals("list)"))
+       {   
+        index = new IndexListArray(fr.getAllPages());                         
+       }
+       else if(ix.equals("hash"))
+       {
+        index = new IndexHash(fr.getAllPages());     
+       }  
+       else 
+       {
+        index = new IndexTree(fr.getAllPages());   
+       }    
+     /*   try {
             var rnd = new Random();
             while (server == null) {
                 try {
@@ -47,13 +63,18 @@ public class WebServerBenchmark {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Benchmark 
-    public void measureAvgTime() throws InterruptedException {
+    public ArrayList<Page> measureAvgTime() throws InterruptedException {
+
+        ArrayList<Page> allPages = new ArrayList<>();
+        for(String word : randomWords)  {
+        allPages.addAll(index.matchingPages(word));
         
-        server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
+        } return allPages;
+        //server.getIndex().matchingPages(randomWords[(int) (Math.random() * randomWords.length)]);
         
     }
 }
