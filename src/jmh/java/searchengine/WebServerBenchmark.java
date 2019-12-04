@@ -1,10 +1,6 @@
 package searchengine;
 
-import java.io.IOException;
-import java.net.BindException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -48,7 +44,7 @@ public class WebServerBenchmark {
        {
         index = new IndexHash(fr.getAllPages());     
        }  
-       else 
+       else if (ix.equals("map"))
        {
         index = new IndexTree(fr.getAllPages());   
        }    
