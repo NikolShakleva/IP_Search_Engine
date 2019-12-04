@@ -39,7 +39,6 @@ public class WebServerBenchmark {
        else if(ix.equals("hash"))   index = new IndexHash(fr.getAllPages());     
          
        else if (ix.equals("map"))   index = new IndexTree(fr.getAllPages());   
-        
     }
 
     @Benchmark 
