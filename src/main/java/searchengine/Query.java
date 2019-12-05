@@ -57,7 +57,7 @@ public class Query {
             int occurences = Collections.frequency(arrayOfSelectedPages, x);
             if(occurences==array.length&&!result.contains(x))
             {
-                //increase the relevance by the nb of occurences
+                
                 result.add(x);
             }
             else
