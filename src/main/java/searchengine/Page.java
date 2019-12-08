@@ -14,6 +14,8 @@ public class Page{
     private ArrayList<String> words;
     private double relevance;
     private HashMap<String, Double> tf;
+    private HashMap<String, Double> tfIdf;
+
 
 
     public Page(String pageUrl, String pageTitle, ArrayList<String> words){
@@ -46,47 +48,48 @@ public class Page{
             return words;
         }
 
-
-        public void increaseRelevance(String x)
-        {
-            relevance = relevance + tf.get(x);
-            // int occurences = Collections.frequency(words, x);
-            // this.relevance+=occurences;
-        }
-
-        public void resetRelevance()
-        {
-            this.relevance = 0;
-        }
-
         public HashMap<String, Double> makeTF()
         {
             tf = new HashMap<>();
             for(String x : words)
             {
-            int occurences = Collections.frequency(words, x);
-            double tf1 = occurences/words.size();
+            double occurences = Collections.frequency(words, x);
+            double allWords = words.size();
+            double tf1 = occurences / allWords;
             tf.put(x, tf1);
             }
 
             return tf;
         }
 
-        public void finalCalculation(HashMap<String , Double> param)
-        {
+        public void finalCalculation(HashMap<String , Double> idfFromIndex)    {
+            tfIdf = new HashMap<>();
             for(String x : tf.keySet())
             {
-                double currentWordRelevance = tf.get(x) * param.get(x);
-                tf.put(x, currentWordRelevance);
+                double currentWordRelevance = tf.get(x) * idfFromIndex.get(x);
+                tfIdf.put(x, currentWordRelevance);
             }
-
         }
 
-        public double getRelevance()
-        {
-            //double relevance = tf.get(searchword);
-            return relevance;
+        public double getRelevanceIDF(String word) {
+            double wordRelevence = tfIdf.get(word);
+            if(title.contains(word))  {
+                wordRelevence += tfIdf.get(word);
+            }
+            return wordRelevence;
         }
-
-        
+        public double getRelevanceSimple(String word) {
+            double wordRelevence = Collections.frequency(words, word);
+            if(title.contains(word))  {
+                wordRelevence += tfIdf.get(word);
+            }
+            return wordRelevence;
+        }
+        public double getRelevanceTF(String word) {
+            double wordRelevence = tf.get(word);
+            if(title.contains(word))  {
+                wordRelevence += tfIdf.get(word);
+            }return wordRelevence;
+            
+        }
 }

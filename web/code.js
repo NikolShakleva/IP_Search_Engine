@@ -19,7 +19,7 @@ document.getElementById('searchbutton').onclick = () => {
             "<p>" + data.length + " websites retrieved</p>";
         }
         let results = data.map((page) =>
-            `<li><a href="${page.url}">${page.title}</a><p><i> Page Relevance: ${page.relevance}</i></p></li>`)
+            `<li><a href="${page.url}">${page.title}</a><p><i> Page Relevance: ${page.relevance}, totalWords: ${page.totalWords}, words: ${page.words}</i></p></li>`)
             .join("\n");
         document.getElementById("urllist").innerHTML = `<ul>${results}</ul>`;
     });

@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -97,7 +98,7 @@ public class WebServer {
        * @param io, HttpExchange
        * @param correctPages, ArrayList of results matching the SearchWord
        */
-      void respond(HttpExchange io, ArrayList<Page> correctPages) { 
+      void respond(HttpExchange io, HashMap<Page, Double> correctPages) { 
         var responder = new Responder(correctPages);                        
         List<String> response = new ArrayList<>(responder.getPageNames());   
         var bytes = response.toString().getBytes(CHARSET);                  
