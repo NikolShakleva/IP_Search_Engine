@@ -31,7 +31,7 @@ public class WebServer {
 
        WebServer(int port, String filename, String ix) throws IOException {
        fileReader = new FileReader(filename); 
-       if(ix.equals("list)"))
+       if(ix.equals("list"))
        {   
         index = new IndexListArray(fileReader.getAllPages());                         
        }
@@ -130,7 +130,7 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename, "tree");
+        new WebServer(PORT, filename, "hash");
       
        
       }

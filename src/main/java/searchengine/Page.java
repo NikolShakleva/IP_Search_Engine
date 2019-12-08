@@ -49,7 +49,7 @@ public class Page{
 
         public void increaseRelevance(String x)
         {
-            relevance += tf.get(x);
+            relevance = relevance + tf.get(x);
             // int occurences = Collections.frequency(words, x);
             // this.relevance+=occurences;
         }

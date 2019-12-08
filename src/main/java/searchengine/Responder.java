@@ -31,8 +31,9 @@ public class Responder{
         for (Page page: correctPages){
             String url = page.getUrl();
             String title = page.getTitle();
-            response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\"}",
-                                 url, title)); 
+            double relevance = page.getRelevance();
+            response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\", \"relevance\": \"%s\"}",
+                                 url, title, relevance)); 
             page.resetRelevance();
             
 

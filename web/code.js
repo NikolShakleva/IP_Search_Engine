@@ -1,4 +1,11 @@
 /* jshint esversion: 6 */
+var input = document.getElementById("searchbox");
+input.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("searchbutton").click();
+    }
+});
 
 document.getElementById('searchbutton').onclick = () => {
     fetch("/search?q=" + document.getElementById('searchbox').value)
@@ -12,8 +19,10 @@ document.getElementById('searchbutton').onclick = () => {
             "<p>" + data.length + " websites retrieved</p>";
         }
         let results = data.map((page) =>
-            `<li><a href="${page.url}">${page.title}</a></li>`)
+            `<li><a href="${page.url}">${page.title}</a><p><i> Page Relevance: ${page.relevance}</i></p></li>`)
             .join("\n");
         document.getElementById("urllist").innerHTML = `<ul>${results}</ul>`;
     });
 };
+/* jshint esversion: 6 */
+

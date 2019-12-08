@@ -62,8 +62,7 @@ public class IndexHash implements Index {
         return allPages;
     }
 
-    public void idfToPages()
-    {
+    public void idfToPages()    {
         for(Page x : allPages)
         {
             x.finalCalculation(idf);
