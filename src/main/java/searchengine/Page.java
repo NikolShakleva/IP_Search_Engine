@@ -26,9 +26,6 @@ public class Page{
         makeTF();
 
     }
-    public void replaceWords(ArrayList<String> list) {
-        words.addAll(list);
-    }
        /**
         * 
         * @return, the pages' URL as a String
@@ -51,23 +48,23 @@ public class Page{
         public HashMap<String, Double> makeTF()
         {
             tf = new HashMap<>();
-            for(String x : words)
+            for(String singleWord : words)
             {
-            double occurences = Collections.frequency(words, x);
+            double occurences = Collections.frequency(words, singleWord);
             double allWords = words.size();
-            double tf1 = occurences / allWords;
-            tf.put(x, tf1);
+            double tfRatio = occurences / allWords;
+            tf.put(singleWord, tfRatio);
             }
 
             return tf;
         }
 
-        public void finalCalculation(HashMap<String , Double> idfFromIndex)    {
+        public void TFIDFCalculation(HashMap<String , Double> idfFromIndex)    {
             tfIdf = new HashMap<>();
-            for(String x : tf.keySet())
+            for(String wordKey : tf.keySet())
             {
-                double currentWordRelevance = tf.get(x) * idfFromIndex.get(x);
-                tfIdf.put(x, currentWordRelevance);
+                double currentWordRelevance = tf.get(wordKey) * idfFromIndex.get(wordKey);
+                tfIdf.put(wordKey, currentWordRelevance);
             }
         }
 

@@ -40,23 +40,22 @@ public class IndexHash implements Index {
 
     public HashMap<String, Double> makeIDF() {
         idf = new HashMap<>();
-        for (String x : wordsToPages.keySet())
+        for (String word : wordsToPages.keySet())
         {
-            double numberOfPages = wordsToPages.get(x).size();
+            double numberOfPages = wordsToPages.get(word).size();
             Double idf1 = Math.log(allPages.size()/numberOfPages);
-            idf.put(x, idf1);
+            idf.put( word, idf1);
         }
         return idf;
-
-
     }
 
     public ArrayList<Page> matchingPages(String input)   {
         ArrayList<Page> matchingPages = new ArrayList<Page>();
        if(wordsToPages.containsKey(input))  {
-        matchingPages = wordsToPages.get(input);   {
-        }     
-    }   return matchingPages;
+         matchingPages = wordsToPages.get(input);      
+    }  
+       return matchingPages;
+
     }
     public ArrayList<Page> getAllPages()  {
         return allPages;
@@ -65,7 +64,7 @@ public class IndexHash implements Index {
     public void idfToPages()    {
         for(Page page : allPages)
         {
-            page.finalCalculation(idf);
+            page.TFIDFCalculation(idf);
         }
     }
 
