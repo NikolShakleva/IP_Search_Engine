@@ -1,7 +1,6 @@
 package searchengine;
 
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * IndexHash
@@ -16,7 +15,7 @@ public class IndexHash implements Index {
         wordsToPages = new HashMap<>();
         makeHashMap();
         makeIDF();
-        idfToPages();
+        tfidfToPages();
     }
 
     public HashMap<String, ArrayList<Page>> makeHashMap() {
@@ -61,7 +60,7 @@ public class IndexHash implements Index {
         return allPages;
     }
 
-    public void idfToPages()    {
+    public void tfidfToPages()    {
         for(Page page : allPages)
         {
             page.TFIDFCalculation(idf);

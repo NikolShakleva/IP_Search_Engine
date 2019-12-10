@@ -12,7 +12,6 @@ public class Page{
     private String url;
     private String title;
     private ArrayList<String> words;
-    private double relevance;
     private HashMap<String, Double> tf;
     private HashMap<String, Double> tfIdf;
 
@@ -22,7 +21,6 @@ public class Page{
         this.title = pageTitle;
         this.url = pageUrl;
         this.words = words;
-        relevance = 0;
         makeTF();
 
     }
@@ -68,7 +66,7 @@ public class Page{
             }
         }
 
-        public double getRelevanceIDF(String word) {
+        public double getRelevanceTFIDF(String word) {
             double wordRelevence = tfIdf.get(word);
             if(title.contains(word))  {
                 wordRelevence += tfIdf.get(word);
