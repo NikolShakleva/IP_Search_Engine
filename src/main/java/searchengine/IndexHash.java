@@ -42,7 +42,7 @@ public class IndexHash implements Index {
         for (String word : wordsToPages.keySet())
         {
             double numberOfPages = wordsToPages.get(word).size();
-            Double idf1 = Math.log(allPages.size()/numberOfPages);
+            Double idf1 = Math.log10(allPages.size()/numberOfPages);
             idf.put( word, idf1);
         }
         return idf;
