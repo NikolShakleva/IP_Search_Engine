@@ -24,9 +24,9 @@ public class Query {
     }
     public void splitSearch(String searchTerm)  {
         var searchTermsGrouped = new ArrayList<String[]>();
-        String[] arrayOfOR = searchTerm.split(" OR ");
+        String[] arrayOfOR = searchTerm.split("%20OR%20");
         for(String array : arrayOfOR) {
-            String[] arrayPairingWords = array.split(" ");
+            String[] arrayPairingWords = array.split("%20");
             searchTermsGrouped.add(arrayPairingWords); 
         }
         getKeyPages(searchTermsGrouped);
