@@ -1,10 +1,6 @@
 package searchengine;
 
 import java.util.*;
-<<<<<<< HEAD
-
-=======
->>>>>>> 538d296732c9a9ce4e5b7e2d776b51790c71aa71
 
 /**
  * IndexHash

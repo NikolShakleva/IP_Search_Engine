@@ -96,13 +96,8 @@ public class Page{
         */
         public double getRelevanceTFIDF(String word) {
             double wordRelevence = tfIdf.get(word);
-<<<<<<< HEAD
             if(title.toLowerCase().contains(word))  {
                 wordRelevence = wordRelevence * 2.0  ;
-=======
-            if(title.contains(word))  {  // if the words is a title of the page, the relevance score is doubled
-                wordRelevence += tfIdf.get(word);
->>>>>>> 538d296732c9a9ce4e5b7e2d776b51790c71aa71
             }
             return wordRelevence;
         }
@@ -114,15 +109,9 @@ public class Page{
         
         public double getRelevanceSimple(String word) {
             double wordRelevence = Collections.frequency(words, word);
-<<<<<<< HEAD
             if(title.toLowerCase().contains(word))  {
                  wordRelevence = wordRelevence * 2.0 ;
              }
-=======
-            if(title.contains(word))  {  // if the words is a title of the page, the relevance score is doubled
-                wordRelevence += tfIdf.get(word);
-            }
->>>>>>> 538d296732c9a9ce4e5b7e2d776b51790c71aa71
             return wordRelevence;
         }
 
@@ -132,13 +121,8 @@ public class Page{
         */
         public double getRelevanceTF(String word) {
             double wordRelevence = tf.get(word);
-<<<<<<< HEAD
             if(title.toLowerCase().contains(word))  {
                 wordRelevence = wordRelevence * 2.0 ;
-=======
-            if(title.contains(word))  {   // if the words is a title of the page, the relevance score is doubled
-                wordRelevence += tfIdf.get(word);
->>>>>>> 538d296732c9a9ce4e5b7e2d776b51790c71aa71
             }
             return wordRelevence;
             
