@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.TestInstance.Lifecycle;
 
 import java.io.IOException;
-import java.net.BindException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
