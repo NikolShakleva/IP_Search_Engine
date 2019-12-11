@@ -12,9 +12,9 @@ public class Query {
     //private ArrayList<Page> relevantPages;
     private Index index;
     private HashMap<Page, Double> sorted;
-    private RelevanceSimple relevance;
+    private Relevance relevance;
 
-    public Query(String input, Index index, RelevanceSimple relevance)  {
+    public Query(String input, Index index, Relevance relevance)  {
         this.index = index;
         this.relevance = relevance;
         splitSearch(input);    

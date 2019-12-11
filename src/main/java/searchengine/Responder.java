@@ -1,7 +1,6 @@
 package searchengine;
 
 import java.util.*;
-import static java.util.stream.Collectors.*;
 
 /**
  * Responder
@@ -13,9 +12,11 @@ import static java.util.stream.Collectors.*;
 
 public class Responder {
     private HashMap<Page, Double> correctPages;
+    LinkedHashMap<Page, Double> sortedMap = new LinkedHashMap<>();
 
     public Responder(HashMap<Page, Double> correctPages){
         this.correctPages = correctPages;
+        
     }
     /**
      * 
@@ -24,21 +25,25 @@ public class Responder {
     public ArrayList<String> getPageNames(){
          ArrayList<String> response = new ArrayList<>(); 
 
-        correctPages
+         correctPages.entrySet()
+         .stream()
+        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
+        .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+      /*  correctPages
         .entrySet()
         .stream()
-        .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+        .sorted(Map.Entry.comparingByValue())
         .collect(
             toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                 LinkedHashMap::new));
+        */
         
-        
-        for (Page page: correctPages.keySet()){
+        for (Page page: sortedMap.keySet()){
             String url = page.getUrl();
             String title = page.getTitle();
             int totalWords = page.getWords().size();
             String words = page.getWords().toString();
-            double relevance = correctPages.get(page);
+            double relevance = sortedMap.get(page);
             response.add(String.format("{\"url\": \"%s\", \"title\": \"%s\", \"relevance\": \"%s\", \"totalWords\": \"%s\", \"words\": \"%s\"}",
                                  url, title, relevance, totalWords, words)); 
         } return response;

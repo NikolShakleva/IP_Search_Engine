@@ -27,22 +27,26 @@ public class WebServer {
     HttpServer server;
     FileReader fileReader;
     IndexHash index;
-    RelevanceSimple relevance;
+    Relevance relevance;
   
 
-       WebServer(int port, String filename) throws IOException {
+       WebServer(int port, String filename, String relevanceType) throws IOException {
        fileReader = new FileReader(filename); 
       
         index = new IndexHash(fileReader.getAllPages());     
        
-      // if(relevanceType.equals("simple"))
-      // {
+      if(relevanceType.equals("simple"))
+      {
          relevance = new RelevanceSimple(index.getwordsToPages());
-      // }
-      //  if(relevanceType.equals("TF"))
-      //  {
-      //    relevance = new RelevanceTF(index.getwordsToPages());
-      //  }
+      }
+        if(relevanceType.equals("tfidf"))
+      {
+          relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
+      }
+        if(relevanceType.equals("tf"))
+      {
+            relevance = new RelevanceTermFrequency(index.getwordsToPages());
+      }
        
        
                 
@@ -129,7 +133,7 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename);
+        new WebServer(PORT, filename, "tfidf");
         //var webserver = new WebServer(PORT, filename, "hash");
        //webserver.search("word1 word2 OR word2 word4");
       
