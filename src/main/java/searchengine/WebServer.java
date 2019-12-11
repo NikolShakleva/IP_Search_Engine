@@ -27,18 +27,18 @@ public class WebServer {
     HttpServer server;
     FileReader fileReader;
     IndexHash index;
-    Relevance relevance;
+    RelevanceSimple relevance;
   
 
-       WebServer(int port, String filename, String relevanceType) throws IOException {
+       WebServer(int port, String filename) throws IOException {
        fileReader = new FileReader(filename); 
       
         index = new IndexHash(fileReader.getAllPages());     
        
-       if(relevanceType.equals("simple"))
-       {
+      // if(relevanceType.equals("simple"))
+      // {
          relevance = new RelevanceSimple(index.getwordsToPages());
-       }
+      // }
       //  if(relevanceType.equals("TF"))
       //  {
       //    relevance = new RelevanceTF(index.getwordsToPages());
@@ -85,12 +85,12 @@ public class WebServer {
      * @param io, HttpExchange
      */
     public void search(HttpExchange io) {  
-        var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
+       var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
         var query = new Query(searchTerm, index, relevance);                       
-        var correctPages = query.getCorrectPages();  
+        var correctPages = query.getCorrectPages();
                                                                            
 
-        respond(io,correctPages);                                        
+        respond(io, correctPages);                                        
       }
 
       /**
@@ -126,15 +126,12 @@ public class WebServer {
           io.close();
         }
       }
-      public Index getIndex() {
-        return index;
-      }
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename, "simple");
+        new WebServer(PORT, filename);
         //var webserver = new WebServer(PORT, filename, "hash");
-       // webserver.search("badminton university");
+       //webserver.search("word1 word2 OR word2 word4");
       
       }
 }

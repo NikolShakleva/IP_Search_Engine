@@ -11,17 +11,18 @@ import java.util.*;
 public class Query {
     //private ArrayList<Page> relevantPages;
     private Index index;
-    private HashMap<Page, Double> sort = new HashMap<>();
-    private Relevance relevance;
+    private HashMap<Page, Double> sorted;
+    private RelevanceSimple relevance;
 
-    public Query(String input, Index index, Relevance relevance){
+    public Query(String input, Index index, RelevanceSimple relevance)  {
         this.index = index;
-        splitSearch(input.toLowerCase());
         this.relevance = relevance;
+        splitSearch(input);    
     }
  
-    public HashMap<Page, Double> getCorrectPages(){
-        return sort;
+    public HashMap<Page, Double> getCorrectPages()  {
+        
+        return sorted;
     }
 
     public void splitSearch(String searchTerm)  {
@@ -36,11 +37,12 @@ public class Query {
 
      public void getKeyPages(ArrayList<String[]> searchTermsGrouped) {
         
-        ArrayList<Page> matchingPagesfromIndex = new ArrayList<>();
-        ArrayList<Page> matchesAllWords = new ArrayList<>();
 
         for(String[] words : searchTermsGrouped)    {
+            ArrayList<Page> matchingPagesfromIndex = new ArrayList<>();
+            ArrayList<Page> matchesAllWords = new ArrayList<>();
             for(String word : words) {
+                word.toLowerCase();
             matchingPagesfromIndex.addAll(index.matchingPages(word));
             }
              for(Page page : matchingPagesfromIndex) {
@@ -52,8 +54,9 @@ public class Query {
             
             relevance.calculatingRelevance(matchesAllWords, words);  
       } 
-        sort = relevance.getMapOfRelevance();
-        
+        sorted = new HashMap<>(relevance.getMapOfRelevance()); 
+        relevance.clearMap();
+    
      }
 
 
