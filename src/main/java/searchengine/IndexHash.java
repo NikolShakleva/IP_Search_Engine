@@ -8,14 +8,14 @@ import java.util.*;
 public class IndexHash implements Index {
     private HashMap<String, ArrayList<Page>> wordsToPages;
     private ArrayList<Page> allPages;
-    private HashMap<String, Double> idf;
+    //private HashMap<String, Double> idf;
 
     public IndexHash(ArrayList<Page> allPages) {
         this.allPages = allPages;
         wordsToPages = new HashMap<>();
         makeHashMap();
-        makeIDF();
-        tfidfToPages();
+       // makeIDF();
+       // tfidfToPages();
     }
 
     public HashMap<String, ArrayList<Page>> makeHashMap() {
@@ -37,7 +37,7 @@ public class IndexHash implements Index {
         return wordsToPages;
     }
 
-    public HashMap<String, Double> makeIDF() {
+   /* public HashMap<String, Double> makeIDF() {
         idf = new HashMap<>();
         for (String word : wordsToPages.keySet())
         {
@@ -46,7 +46,7 @@ public class IndexHash implements Index {
             idf.put( word, idf1);
         }
         return idf;
-    }
+    }*/
 
     public ArrayList<Page> matchingPages(String input)   {
         ArrayList<Page> matchingPages = new ArrayList<Page>();
@@ -60,11 +60,16 @@ public class IndexHash implements Index {
         return allPages;
     }
 
-    public void tfidfToPages()    {
+    /*public void tfidfToPages()    {
         for(Page page : allPages)
         {
             page.TFIDFCalculation(idf);
         }
+    }*/
+
+    public HashMap<String, ArrayList<Page>> getwordsToPages()
+    {
+        return wordsToPages;
     }
 
 }

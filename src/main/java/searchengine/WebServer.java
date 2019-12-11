@@ -26,23 +26,25 @@ public class WebServer {
   
     HttpServer server;
     FileReader fileReader;
-    Index index;
+    IndexHash index;
+    Relevance relevance;
   
 
-       WebServer(int port, String filename, String type) throws IOException {
+       WebServer(int port, String filename, String relevanceType) throws IOException {
        fileReader = new FileReader(filename); 
-       if(type.equals("list"))
-       {   
-        index = new IndexListArray(fileReader.getAllPages());                         
-       }
-       else if(type.equals("hash"))
-       {
+      
         index = new IndexHash(fileReader.getAllPages());     
-       }  
-       else 
+       
+       if(relevanceType.equals("simple"))
        {
-        index = new IndexTree(fileReader.getAllPages());   
-       }    
+         relevance = new RelevanceSimple(index.getwordsToPages());
+       }
+      //  if(relevanceType.equals("TF"))
+      //  {
+      //    relevance = new RelevanceTF(index.getwordsToPages());
+      //  }
+       
+       
                 
 
 
@@ -84,7 +86,7 @@ public class WebServer {
      */
     public void search(HttpExchange io) {  
         var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
-        var query = new Query(searchTerm, index);                       
+        var query = new Query(searchTerm, index, relevance);                       
         var correctPages = query.getCorrectPages();  
                                                                            
 
@@ -130,11 +132,10 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename, "hash");
+        new WebServer(PORT, filename, "simple");
         //var webserver = new WebServer(PORT, filename, "hash");
        // webserver.search("badminton university");
       
-       
       }
 }
     

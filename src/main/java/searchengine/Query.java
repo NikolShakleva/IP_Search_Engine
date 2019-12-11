@@ -12,16 +12,18 @@ public class Query {
     //private ArrayList<Page> relevantPages;
     private Index index;
     private HashMap<Page, Double> sort = new HashMap<>();
+    private Relevance relevance;
 
-    public Query(String input, Index index){
+    public Query(String input, Index index, Relevance relevance){
         this.index = index;
         splitSearch(input.toLowerCase());
-       
+        this.relevance = relevance;
     }
  
     public HashMap<Page, Double> getCorrectPages(){
         return sort;
     }
+
     public void splitSearch(String searchTerm)  {
         var searchTermsGrouped = new ArrayList<String[]>();
         String[] arrayOfOR = searchTerm.split("%20OR%20");
@@ -32,7 +34,7 @@ public class Query {
         getKeyPages(searchTermsGrouped);
      }
 
-     public HashMap<Page, Double> getKeyPages(ArrayList<String[]> searchTermsGrouped) {
+     public void getKeyPages(ArrayList<String[]> searchTermsGrouped) {
         
         ArrayList<Page> matchingPagesfromIndex = new ArrayList<>();
         ArrayList<Page> matchesAllWords = new ArrayList<>();
@@ -46,35 +48,38 @@ public class Query {
                 if(occurences==words.length&&!matchesAllWords.contains(page))   {  
                     matchesAllWords.add(page);
                 }          
-            } sortPages(matchesAllWords, words);  
+            } 
+            
+            relevance.calculatingRelevance(matchesAllWords, words);  
       } 
-        return sort;
+        sort = relevance.getMapOfRelevance();
+        
      }
 
 
-     public void sortPages(ArrayList<Page> matchesAllWords,String[] words )    {
+    //  public void calculatingRelevance(ArrayList<Page> matchesAllWords,String[] words )    {
      
-        for(Page page : matchesAllWords)  {
-            if(sort.containsKey(page))  {
-                double currentRlv = sort.get(page);
-                double possibleRlv = 0;
-                for(String word : words)    {
-                    double rlv = page.getRelevanceTF(word);
-                    possibleRlv += rlv;
-                    }
-                    if (currentRlv < possibleRlv)  {
-                        sort.put(page, possibleRlv);
-                        }
-            } else {
-                double currentRlv = 0;
-                for(String word : words)    {
-                    double rlv = page.getRelevanceTF(word);
-                    currentRlv += rlv;
-                    sort.put(page, currentRlv);
-                }
-            }
-        }
-    }
+    //     for(Page page : matchesAllWords)  {
+    //         if(sort.containsKey(page))  {
+    //             double currentRlv = sort.get(page);
+    //             double possibleRlv = 0;
+    //             for(String word : words)    {
+    //                 double rlv = page.getRelevanceTF(word);
+    //                 possibleRlv += rlv;
+    //                 }
+    //                 if (currentRlv < possibleRlv)  {
+    //                     sort.put(page, possibleRlv);
+    //                     }
+    //         } else {
+    //             double currentRlv = 0;
+    //             for(String word : words)    {
+    //                 double rlv = page.getRelevanceTF(word);
+    //                 currentRlv += rlv;
+    //                 sort.put(page, currentRlv);
+    //             }
+    //         }
+    //     }
+    // }
 
      
 
