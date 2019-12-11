@@ -32,28 +32,29 @@ public class Query {
         getKeyPages(searchTermsGrouped);
      }
 
-     public HashMap<Page, Double> getKeyPages(ArrayList<String[]> input) {
+     public HashMap<Page, Double> getKeyPages(ArrayList<String[]> searchTermsGrouped) {
         
         ArrayList<Page> matchingPagesfromIndex = new ArrayList<>();
         ArrayList<Page> matchesAllWords = new ArrayList<>();
 
-        for(String[] array : input)    {
-            for(String word : array)
+        for(String[] words : searchTermsGrouped)    {
+            for(String word : words) {
             matchingPagesfromIndex.addAll(index.matchingPages(word));
+            }
              for(Page page : matchingPagesfromIndex) {
                 int occurences = Collections.frequency(matchingPagesfromIndex, page);
-                if(occurences==array.length&&!matchesAllWords.contains(page))   {  
+                if(occurences==words.length&&!matchesAllWords.contains(page))   {  
                     matchesAllWords.add(page);
                 }          
-        } sortPages(matchesAllWords, array);  
-    } 
+            } sortPages(matchesAllWords, words);  
+      } 
         return sort;
      }
 
 
-     public void sortPages(ArrayList<Page> pages,String[] words )    {
+     public void sortPages(ArrayList<Page> matchesAllWords,String[] words )    {
      
-        for(Page page : pages)  {
+        for(Page page : matchesAllWords)  {
             if(sort.containsKey(page))  {
                 double currentRlv = sort.get(page);
                 double possibleRlv = 0;
@@ -70,8 +71,8 @@ public class Query {
                     double rlv = page.getRelevanceTF(word);
                     currentRlv += rlv;
                     sort.put(page, currentRlv);
-                    }
                 }
+            }
         }
     }
 

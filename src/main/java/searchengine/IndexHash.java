@@ -1,7 +1,10 @@
 package searchengine;
 
 import java.util.*;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 538d296732c9a9ce4e5b7e2d776b51790c71aa71
 
 /**
  * IndexHash
@@ -16,7 +19,7 @@ public class IndexHash implements Index {
         wordsToPages = new HashMap<>();
         makeHashMap();
         makeIDF();
-        idfToPages();
+        tfidfToPages();
     }
 
     public HashMap<String, ArrayList<Page>> makeHashMap() {
@@ -40,32 +43,31 @@ public class IndexHash implements Index {
 
     public HashMap<String, Double> makeIDF() {
         idf = new HashMap<>();
-        for (String x : wordsToPages.keySet())
+        for (String word : wordsToPages.keySet())
         {
-            double numberOfPages = wordsToPages.get(x).size();
-            Double idf1 = Math.log(allPages.size()/numberOfPages);
-            idf.put(x, idf1);
+            double numberOfPages = wordsToPages.get(word).size();
+            Double idf1 = Math.log10(allPages.size()/numberOfPages);
+            idf.put( word, idf1);
         }
         return idf;
-
-
     }
 
     public ArrayList<Page> matchingPages(String input)   {
         ArrayList<Page> matchingPages = new ArrayList<Page>();
        if(wordsToPages.containsKey(input))  {
-        matchingPages = wordsToPages.get(input);   {
-        }     
-    }   return matchingPages;
+         matchingPages = wordsToPages.get(input);      
+    }  
+       return matchingPages;
+
     }
     public ArrayList<Page> getAllPages()  {
         return allPages;
     }
 
-    public void idfToPages()    {
+    public void tfidfToPages()    {
         for(Page page : allPages)
         {
-            page.finalCalculation(idf);
+            page.TFIDFCalculation(idf);
         }
     }
 

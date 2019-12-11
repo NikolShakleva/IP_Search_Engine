@@ -13,10 +13,9 @@ import static java.util.stream.Collectors.*;
 
 public class Responder {
     private HashMap<Page, Double> correctPages;
-    private HashMap<Page, Double> sorted;
 
     public Responder(HashMap<Page, Double> correctPages){
-        this.correctPages = new HashMap<Page, Double>(correctPages);
+        this.correctPages = correctPages;
     }
     /**
      * 
@@ -25,16 +24,16 @@ public class Responder {
     public ArrayList<String> getPageNames(){
          ArrayList<String> response = new ArrayList<>(); 
 
-        sorted = correctPages
+        correctPages
         .entrySet()
         .stream()
         .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
         .collect(
             toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
                 LinkedHashMap::new));
-        //
         
-        for (var page: sorted.keySet()){
+        
+        for (Page page: correctPages.keySet()){
             String url = page.getUrl();
             String title = page.getTitle();
             int totalWords = page.getWords().size();

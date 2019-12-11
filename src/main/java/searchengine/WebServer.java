@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
@@ -30,13 +29,13 @@ public class WebServer {
     Index index;
   
 
-       WebServer(int port, String filename, String ix) throws IOException {
+       WebServer(int port, String filename, String type) throws IOException {
        fileReader = new FileReader(filename); 
-       if(ix.equals("list"))
+       if(type.equals("list"))
        {   
         index = new IndexListArray(fileReader.getAllPages());                         
        }
-       else if(ix.equals("hash"))
+       else if(type.equals("hash"))
        {
         index = new IndexHash(fileReader.getAllPages());     
        }  
@@ -89,7 +88,7 @@ public class WebServer {
         var correctPages = query.getCorrectPages();  
                                                                            
 
-        respond(io, correctPages);                                        
+        respond(io,correctPages);                                        
       }
 
       /**
@@ -100,10 +99,10 @@ public class WebServer {
        */
       void respond(HttpExchange io, HashMap<Page, Double> correctPages) { 
         var responder = new Responder(correctPages);                        
-        List<String> response = new ArrayList<>(responder.getPageNames());   
+        ArrayList<String> response = responder.getPageNames();   
         var bytes = response.toString().getBytes(CHARSET);                  
         
-        display(io, 200, "application/json", bytes);                       
+       display(io, 200, "application/json", bytes);                       
       }
 
       /**
@@ -132,6 +131,8 @@ public class WebServer {
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
         new WebServer(PORT, filename, "hash");
+        //var webserver = new WebServer(PORT, filename, "hash");
+       // webserver.search("badminton university");
       
        
       }
