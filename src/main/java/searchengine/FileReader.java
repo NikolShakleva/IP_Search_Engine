@@ -47,8 +47,7 @@ public class FileReader {
 
                             if(!word.startsWith("*PAGE"))  {
                                 words.add(word);    // fills the arrayList of words for each page object
-                            } 
-                            else    {                    // when a page contains no more words, stop adding words to the arraylist of words
+                            } else    {                    // when a page contains no more words, stop adding words to the arraylist of words
                                 line = word;
                                 break;
                             }
@@ -57,8 +56,7 @@ public class FileReader {
                             Page pt = new Page(pageUrl,title, words);
                             allPages.add(pt); 
                         }
-                    } 
-                    else   {     // if the line doesn't start with a *PAGE
+                    } else   {     // if the line doesn't start with a *PAGE
                         line = "Error";           // the reading of the file is terminated
                     }
                 }     

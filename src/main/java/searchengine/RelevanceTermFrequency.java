@@ -27,8 +27,7 @@ public class RelevanceTermFrequency implements Relevance    {
                     if(!currentSearchString.containsKey(page))  {
                         Double rlv = currentwords.get(page);
                         currentSearchString.put(page, rlv);
-                    }
-                    else   {
+                    } else   {
                         double rlv = currentSearchString.get(page);
                         rlv = rlv + currentSearchString.get(page);
                         currentSearchString.put(page, rlv); 
