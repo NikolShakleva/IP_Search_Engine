@@ -15,7 +15,7 @@ public class Query {
 
     public Query(String input, Index index){
         this.index = index;
-        splitSearch(input);
+        splitSearch(input.toLowerCase());
        
     }
  
