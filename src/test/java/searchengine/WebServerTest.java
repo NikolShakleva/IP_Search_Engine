@@ -23,17 +23,13 @@ class WebServerTest {
 
     @BeforeAll
     void setUp() {
-        try {
-            var rnd = new Random();
-            while (server == null) {
-                try {
-                    server = new WebServer(rnd.nextInt(60000) + 1024, "data/test-file.txt");
-                } catch (BindException e) {
-                    // port in use. Try again
-                }
+        var rnd = new Random();
+        while (server == null) {
+            try {
+                server = new WebServer(rnd.nextInt(60000) + 1024, "filename", "tfidf");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

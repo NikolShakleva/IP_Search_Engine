@@ -33,67 +33,64 @@ public class RelevanceTFIDF implements Relevance {
             }
     }
 
-	@Override
+	
 	public void calculatingRelevance(ArrayList<Page> matchesAllWords, String[] words) {
         HashMap<Page, Double> currentSearchString = new HashMap<>();
         for(String word : words) {  
-             HashMap <Page, Double> currentwords = wordsrelevanceMap.get(word);
-             for(Page page : matchesAllWords)
-             if(!currentSearchString.containsKey(page))  {
-                 Double rlv = currentwords.get(page);
-                 currentSearchString.put(page, rlv);
-             }else   {
-                 if(currentSearchString.containsKey(page)) {
-                     double rlv = currentSearchString.get(page);
-                     rlv = rlv + currentSearchString.get(page);
-                     currentSearchString.put(page, rlv); 
-             }
- 
-                
-                 }
-             }
-          for(var page : currentSearchString.keySet())  {
-             double relevanceCurrent = currentSearchString.get(page);
-             if(sort.containsKey(page))  {
-                 double relevanceSort = sort.get(page);
-                 if(relevanceCurrent > relevanceSort)  {
+            HashMap <Page, Double> currentwords = wordsrelevanceMap.get(word);
+            for(Page page : matchesAllWords){
+                if(!currentSearchString.containsKey(page))  {
+                    Double rlv = currentwords.get(page);
+                    currentSearchString.put(page, rlv);
+                }
+                else   {
+                    double rlv = currentSearchString.get(page);
+                    rlv = rlv + currentSearchString.get(page);
+                    currentSearchString.put(page, rlv); 
+                } 
+                String pageTitle = page.getTitle().toLowerCase();
+                if(pageTitle.contains(word)) {
+                    double rlvWithTitle = currentSearchString.get(page) * 2;
+                    currentSearchString.put(page, rlvWithTitle);
+                }
+            }
+        }
+        for(var page : currentSearchString.keySet())  {
+            double relevanceCurrent = currentSearchString.get(page);
+            if(sort.containsKey(page))  {
+                double relevanceSort = sort.get(page);
+                if(relevanceCurrent > relevanceSort)  {
                      sort.put(page, relevanceCurrent);
-                 }
-             } else {
-                 sort.put(page,relevanceCurrent);
-         } 
-     }	
+                }
+            } 
+            else {
+                sort.put(page,relevanceCurrent);
+            } 
+        }	
 	}
 
-	@Override
+
 	public void makeRelevanceMap(HashMap<String, ArrayList<Page>> mapFromIndex) {
-		      for(String word : mapFromIndex.keySet())
-        {
-            HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
-            for(Page page : mapFromIndex.get(word))
-            {
-                ArrayList<String> words = page.getWords();
-                double wordRelevence = Collections.frequency(words, word);
-                double termFrequency = (wordRelevence / words.size()) * idf.get(word);
-                hashmapRelevanceValue.put(page, termFrequency);
+		    for(String word : mapFromIndex.keySet())    {
+                HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
+                for(Page page : mapFromIndex.get(word)) {
+                    ArrayList<String> words = page.getWords();
+                    double wordRelevence = Collections.frequency(words, word);
+                    double termFrequency = (wordRelevence / words.size()) * idf.get(word);
+                    hashmapRelevanceValue.put(page, termFrequency);
+                }
+                wordsrelevanceMap.put(word, hashmapRelevanceValue);
             }
-            wordsrelevanceMap.put(word, hashmapRelevanceValue);
-        }
 		
 	}
 
-	@Override
+
 	public HashMap<Page, Double> getMapOfRelevance() {
 		return sort;
 	}
 
-	@Override
+
 	public void clearMap() {
-		sort.clear();
-		
+		sort.clear();	
 	}
-
-   
-
-    
 }

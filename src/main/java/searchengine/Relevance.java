@@ -9,7 +9,4 @@ public interface Relevance{
     public HashMap<Page, Double> getMapOfRelevance();
     public void clearMap();
     
-
-    
-
 }

@@ -30,27 +30,16 @@ public class WebServer {
     Relevance relevance;
   
 
-       WebServer(int port, String filename, String relevanceType) throws IOException {
-       fileReader = new FileReader(filename); 
+      WebServer(int port, String filename, String relevanceType) {
+        try{
+        fileReader = new FileReader(filename); 
       
         index = new IndexHash(fileReader.getAllPages());     
        
-      if(relevanceType.equals("simple"))
-      {
-         relevance = new RelevanceSimple(index.getwordsToPages());
-      }
-        if(relevanceType.equals("tfidf"))
-      {
-          relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
-      }
-        if(relevanceType.equals("tf"))
-      {
-            relevance = new RelevanceTermFrequency(index.getwordsToPages());
-      }
+        if(relevanceType.equals("simple"))  relevance = new RelevanceSimple(index.getwordsToPages());
+        if(relevanceType.equals("tfidf")) relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
+        if(relevanceType.equals("tf"))  relevance = new RelevanceTermFrequency(index.getwordsToPages());
        
-       
-                
-
 
       server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
       server.createContext("/", io -> display(io, 200, "text/html", getFile("web/index.html")));
@@ -66,7 +55,12 @@ public class WebServer {
       System.out.println("╭"+"─".repeat(msg.length())+"╮");
       System.out.println("│"+msg+"│");
       System.out.println("╰"+"─".repeat(msg.length())+"╯");
+      
+    } catch (IOException e) {
+      System.out.println("something is wrong, try again");
+      e.printStackTrace();
     }
+  }
 
       /**
        * creates readable content of file for server in bytes
