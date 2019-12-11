@@ -76,7 +76,7 @@ public class Page{
         }
 
         /**
-         * Calculates the tfidf relevance of each word in a page object and stores the result in a TFIDF HashMap <String, Double>
+         * Calculates the TFIDF relevance of each word in a page object and stores the result in a TFIDF HashMap <String, Double>
          * wordKey is the key
          * current relevance is the value
          * @param idfFromIndex This is a HashMap<String, Double> which holds the inverse document frequency (IDF) of each word in all page objects 
@@ -106,7 +106,6 @@ public class Page{
         * @param word The words which relevance score is obtained based on count frequency 
         * @return The simple score relevance of of a given word in double
         */
-        
         public double getRelevanceSimple(String word) {
             double wordRelevence = Collections.frequency(words, word);
             if(title.contains(word))  {  // if the words is a title of the page, the relevance score is doubled
