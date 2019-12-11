@@ -14,24 +14,28 @@ public class RelevanceSimple implements Relevance {
         sort = new HashMap<>();
         makeRelevanceMap(indexWordsToPages); 
     }
-
-    public void makeRelevanceMap(HashMap<String, ArrayList<Page>> mapFromIndex) {//calculates the simple relevance for each word for each page
-        for(String word : mapFromIndex.keySet())    {
-            HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
-            for(Page page : mapFromIndex.get(word)) {
-                ArrayList<String> words = page.getWords();
-                double wordRelevence = Collections.frequency(words, word);
-                hashmapRelevanceValue.put(page, wordRelevence);
+        /**
+         * 
+         */
+        public void makeRelevanceMap(HashMap<String, ArrayList<Page>> mapFromIndex) {//calculates the simple relevance for each word for each page
+            for(String word : mapFromIndex.keySet())    {
+                HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
+                for(Page page : mapFromIndex.get(word)) {
+                    ArrayList<String> words = page.getWords();
+                    double wordRelevence = Collections.frequency(words, word);
+                    hashmapRelevanceValue.put(page, wordRelevence);
+                }
+                wordsrelevanceMap.put(word, hashmapRelevanceValue);
             }
-            wordsrelevanceMap.put(word, hashmapRelevanceValue);
         }
-    }
-
-    public void calculatingRelevance(ArrayList<Page> matchesAllWords,String[] words)    {
-    HashMap<Page, Double> currentSearchString = new HashMap<>();
-        for(String word : words) {  
-            HashMap <Page, Double> currentwords = wordsrelevanceMap.get(word);
-            for(Page page : matchesAllWords){
+        /**
+         * 
+         */
+        public void calculatingRelevance(ArrayList<Page> matchesAllWords,String[] words)    {
+            HashMap<Page, Double> currentSearchString = new HashMap<>();
+            for(String word : words) {  
+                HashMap <Page, Double> currentwords = wordsrelevanceMap.get(word);
+                for(Page page : matchesAllWords){
                 if(!currentSearchString.containsKey(page))  {
                     Double rlv = currentwords.get(page);
                     currentSearchString.put(page, rlv);
@@ -46,29 +50,31 @@ public class RelevanceSimple implements Relevance {
                     double rlvWithTitle = currentSearchString.get(page) * 2;
                     currentSearchString.put(page, rlvWithTitle);
                 }
-            }
-        }
-        for(var page : currentSearchString.keySet())  {
-            double relevanceCurrent = currentSearchString.get(page);
-            if(sort.containsKey(page))  {
-                double relevanceSort = sort.get(page);
-                if(relevanceCurrent > relevanceSort)  {
-                     sort.put(page, relevanceCurrent);
                 }
-            } 
-            else {
-                sort.put(page,relevanceCurrent);
-            } 
-        }	
-	}
-                
-            
-
-    public HashMap<Page, Double> getMapOfRelevance()    {
-        return sort;
-    }
-
-    public void clearMap()  {
-        sort.clear();
-    }
+            }
+            for(var page : currentSearchString.keySet())  {
+                double relevanceCurrent = currentSearchString.get(page);
+                if(sort.containsKey(page))  {
+                    double relevanceSort = sort.get(page);
+                    if(relevanceCurrent > relevanceSort)  {
+                        sort.put(page, relevanceCurrent);
+                    }
+                } 
+                else {
+                    sort.put(page,relevanceCurrent);
+                } 
+            }	
+	    }
+        /**
+         * 
+         */
+        public HashMap<Page, Double> getMapOfRelevance()    {
+            return sort;
+        }
+        /**
+         * 
+         */
+        public void clearMap()  {
+            sort.clear();
+        }
 }

@@ -28,50 +28,44 @@ public class FileReader {
         allPages = new ArrayList<>();
         readFile(filename);
     }
-    /**
-     * Reading the file given from the webserver and creates pages that are added to an arrayList of pages
-     * 
-     * @param filename, filename of text file with websites containing url, title and words
-     */
-    public void readFile(String filename)   {     
-        try(Scanner sc = new Scanner(new File(filename));) {
-            String line = sc.nextLine();
-            while (sc.hasNextLine()) // check if the file contains more words
-            {
-                ArrayList<String> words = new ArrayList<>(); // initialises empthy arrayList of words for each page
-                    if(line.startsWith("*PAGE"))            // checks if the line contains URL
-                    {
+        /**
+        * Reading the file given from the webserver and creates pages that are added to an arrayList of pages
+        * 
+        * @param filename, filename of text file with websites containing url, title and words
+        */
+        public void readFile(String filename)   {     
+            try(Scanner sc = new Scanner(new File(filename));) {
+                String line = sc.nextLine();
+                while (sc.hasNextLine()) {// check if the file contains more words
+                    ArrayList<String> words = new ArrayList<>(); // initialises empthy arrayList of words for each page
+
+                    if(line.startsWith("*PAGE"))   {         // checks if the line contains URL 
                         String pageUrl = line.replace("*PAGE:", ""); //assignes a URL to the page object
                         String title = sc.nextLine();      // assigns a title to the page object 
-                            while (sc.hasNextLine())      // checks if the page contains any words
-                            {
-                             String word = sc.nextLine();  
-                             if(!word.startsWith("*PAGE"))
-                                {
-                                    words.add(word);    // fills the arrayList of words for each page object
-                                } 
-                                else                    // when a page contains no more words, stop adding words to the arraylist of words
-                                {
-                                    line = word;
-                                    break;
-                                }
-                            }
-                            if (!words.isEmpty())      // if the arrayList of words contains words a page object is created
-                            {
-                                Page pt = new Page(pageUrl,title, words);
-                                allPages.add(pt); 
-                            }
-                    } 
-                    else        // if the line doesn't start with a *PAGE
-                               // the reading of the file is terminated
+                        while (sc.hasNextLine())   {   // checks if the page contains any words 
+                            String word = sc.nextLine(); 
 
-                    {
-                        line = "Error";
+                            if(!word.startsWith("*PAGE"))  {
+                                words.add(word);    // fills the arrayList of words for each page object
+                            } 
+                            else    {                    // when a page contains no more words, stop adding words to the arraylist of words
+                                line = word;
+                                break;
+                            }
+                        }
+                        if (!words.isEmpty()) {     // if the arrayList of words contains words a page object is created
+                            Page pt = new Page(pageUrl,title, words);
+                            allPages.add(pt); 
+                        }
+                    } 
+                    else   {     // if the line doesn't start with a *PAGE
+                        line = "Error";           // the reading of the file is terminated
                     }
-            }     
-    } catch (FileNotFoundException e) {
-            e.printStackTrace();   
-    }  }
+                }     
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();   
+            }  
+        }
         /**
          * Return the arraylist of pages - allPages, after the file has been read
          * @return, the full ArrayList of page objects

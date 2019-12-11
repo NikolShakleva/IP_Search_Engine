@@ -20,18 +20,18 @@ import com.sun.net.httpserver.HttpServer;
  * 
  */
 public class WebServer {
-    static final int PORT = 8080;
-    static final int BACKLOG = 0;
-    static final Charset CHARSET = StandardCharsets.UTF_8;
+  static final int PORT = 8080;
+  static final int BACKLOG = 0;
+  static final Charset CHARSET = StandardCharsets.UTF_8;
   
-    HttpServer server;
-    FileReader fileReader;
-    IndexHash index;
-    Relevance relevance;
+  HttpServer server;
+  FileReader fileReader;
+  IndexHash index;
+  Relevance relevance;
   
 
-      WebServer(int port, String filename, String relevanceType) {
-        try{
+    WebServer(int port, String filename, String relevanceType) {
+      try {
         fileReader = new FileReader(filename); 
       
         index = new IndexHash(fileReader.getAllPages());     
@@ -41,26 +41,26 @@ public class WebServer {
         if(relevanceType.equals("tf"))  relevance = new RelevanceTermFrequency(index.getwordsToPages());
        
 
-      server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
-      server.createContext("/", io -> display(io, 200, "text/html", getFile("web/index.html")));
-      server.createContext("/search", io -> search(io));
-      server.createContext(
+        server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
+        server.createContext("/", io -> display(io, 200, "text/html", getFile("web/index.html")));
+        server.createContext("/search", io -> search(io));
+        server.createContext(
             "/favicon.ico", io -> display(io, 200, "image/x-icon", getFile("web/favicon.ico")));
-      server.createContext(
+        server.createContext(
             "/code.js", io -> display(io, 200, "application/javascript", getFile("web/code.js")));
-      server.createContext(
+        server.createContext(
             "/style.css", io -> display(io, 200, "text/css", getFile("web/style.css")));
-      server.start();
-      String msg = " WebServer running on http://localhost:" + port + " ";
-      System.out.println("╭"+"─".repeat(msg.length())+"╮");
-      System.out.println("│"+msg+"│");
-      System.out.println("╰"+"─".repeat(msg.length())+"╯");
+        server.start();
+        String msg = " WebServer running on http://localhost:" + port + " ";
+        System.out.println("╭"+"─".repeat(msg.length())+"╮");
+        System.out.println("│"+msg+"│");
+        System.out.println("╰"+"─".repeat(msg.length())+"╯");
       
-    } catch (IOException e) {
-      System.out.println("something is wrong, try again");
-      e.printStackTrace();
+      } catch (IOException e) {
+        System.out.println("something is wrong, try again");
+        e.printStackTrace();
+      }
     }
-  }
 
       /**
        * creates readable content of file for server in bytes
@@ -77,13 +77,13 @@ public class WebServer {
         }
       }
 
-    /**
-     * Searches for search input in library
-     * 
-     * @param io, HttpExchange
-     */
-    public void search(HttpExchange io) {  
-       var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
+      /**
+      * Searches for search input in library
+      * 
+      * @param io, HttpExchange
+      */
+      public void search(HttpExchange io) {  
+        var searchTerm = io.getRequestURI().getRawQuery().split("=")[1]; 
         var query = new Query(searchTerm, index, relevance);                       
         var correctPages = query.getCorrectPages();
                                                                            
@@ -102,7 +102,7 @@ public class WebServer {
         ArrayList<String> response = responder.getPageNames();   
         var bytes = response.toString().getBytes(CHARSET);                  
         
-       display(io, 200, "application/json", bytes);                       
+        display(io, 200, "application/json", bytes);                       
       }
 
       /**
