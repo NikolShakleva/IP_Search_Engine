@@ -1,20 +1,129 @@
+/* Background */
+body {
+    background-image: linear-gradient(to right , #212121, #000000);
+}
+/*
+** Searchengine features
+*/
+/* Searchbox */
+.searchBox {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform:  translate(-50%,50%);
+    background: #181c21;
+    height: 40px;
+    border-radius: 40px;
+    padding: 10px;  
+}
+
+.searchBox:hover > .searchInput {   
+    width: 240px;
+    padding: 0 6px;
+}
+
+.searchBox:hover > .searchButton {
+    background: white;
+    color : #181c21;
+}
+
+.searchButton {
+    color: white;
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #181c21;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+.searchInput {
+    border:none;
+    background: none;
+    outline:none;
+    float:left;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+}
+
+@media screen and (max-width: 1000px) {
+.searchBox:hover > .searchInput {
+    width: 150px;
+    padding: 0 6px;
+}}
+
+button:focus {outline:0;}
+
+/* Search Results */
 #urllist {
+    text-decoration: none #FFF;
+    position: absolute;
+    top: 5%;
+    left: 0%;    
+    margin-right: 50%;
+}
+
+/* Hyperlink */
+a {
+    font-family : Helvetica, Sans-Serif;
+    color: #f4f4f4;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight:normal;
+}
+
+/* List */
+li {
+    list-style-type: none;
+    margin-bottom: 40px;   
+}
+
+/* Information text of search block*/
+#responsesize {
+    position: fixed;
+    top: 57%;
+    left: 75%;
+    transform:  translate(-50%);
+    text-align: center;
+}
+
+/*
+** Text Configurations
+*/
+/* Headlines */
+h1{
     color: #969696;
-    border: 1px solid #dcdcdc;
-    border-radius: 3px;
 }
 
-input[type="text"] {
-    padding: 10px;
-    margin: 10px;
-    border: solid 1px #dcdcdc;
-    border-radius: 4px;
-    min-width: 200px;
-    transition: box-shadow 0.3s, border 0.3s;
+h2 {
+    text-decoration: none;
+    padding: 0;
+    font-size: 20px;   
+    line-height: 18px;
 }
 
-input[type="text"]:focus,
-input[type="text"].focus {
-    border: solid 1px #707070;
-    box-shadow: 0 0 5px 1px #969696;
+h3 {
+    font-family : Helvetica, Sans-Serif;
+    color: #f4f4f4;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight:normal;
+    font-size: 15px; 
+    padding: 0;
+}
+
+/* Paragraph */
+p {
+    font-family : Helvetica, Sans-Serif;
+    color: #a2a2a2;
+    text-decoration: none;
+    font-size: 11px;
+    line-height: 11px;
 }
