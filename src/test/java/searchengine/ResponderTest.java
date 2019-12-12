@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 
@@ -15,8 +16,9 @@ import org.junit.jupiter.api.*;
  */
 
 public class ResponderTest {
-    private RandomGenerator rnd = new RandomGenerator();
-    private Map<Page, Double> correctPages;
+    RandomGenerator rnd = new RandomGenerator();
+    Map<Page, Double> correctPages = new HashMap<>();
+    
 
     /**
      * Setting up random ArrayList<Page> with 5-50 correct pages
@@ -24,19 +26,19 @@ public class ResponderTest {
      * 
      * Pages will be made with a url, title and ArrayList of 2-50 words
      */
-    @BeforeAll
+    @BeforeEach
     public void setUp()   {
-        int i = 0;
-        while(i < 20)   {
-       // for(int i = 0 ; i < rnd.generateInt(5, 50) ; i++)  {
+   
+       for(int i = 0 ; i < 10 ; i++)  {
             String title = rnd.generateString();
             String pageUrl = "*PAGE https://www." + title + ".com";
             double rlv = rnd.generateInt(1, 100);
-
+            int no =rnd.generateInt(5, 50);
             var words = new ArrayList<String>();
-            while(i < rnd.generateInt(5, 50))  {
+            while(i < no)  {
                 String currentWord = rnd.generateString();
                 words.add(currentWord);
+                i++;
             }
             var page = new Page(pageUrl, title, words);
             correctPages.put(page, rlv);
@@ -45,11 +47,11 @@ public class ResponderTest {
 
     @Test
     public void noMatchesFoundInList()  {
-        Map<Page, Double> emptyList = new HashMap<>();
-        var responder = new Responder(emptyList);
-        int responses = responder.getPageNames().size();
-
-        assertEquals(0, responses);
+        Map<Page, Double> mapFromWebserver = new HashMap<>();
+        var responder = new Responder(mapFromWebserver);
+        var pages = responder.getPageNames();
+        
+        assert(pages.isEmpty() == true);
     }
 
     @Test
@@ -59,5 +61,37 @@ public class ResponderTest {
         int list = correctPages.size();
 
         assertEquals(list, responses);
+    }
+
+    @Test
+    public void highestRelevanceIsFirst() {
+        var responder = new Responder(correctPages);
+        ArrayList<String> responses = responder.getPageNames();
+        double highestValue = 0;
+        String title = "";
+        for(var entery : correctPages.entrySet()){
+            double currentValue = entery.getValue();
+            if(currentValue > highestValue) {
+                highestValue = currentValue;
+                title = entery.getKey().getTitle();
+            }
+
+        } assert(responses.get(0).contains(title));
+    }
+
+    @Test
+    public void lowestRelevanceIsLast() {
+        var responder = new Responder(correctPages);
+        ArrayList<String> responses = responder.getPageNames();
+        double lowestValue = 50;
+        String title = "";
+        for(var entery : correctPages.entrySet()){
+            double currentValue = entery.getValue();
+            if(currentValue < lowestValue) {
+                lowestValue = currentValue;
+                title = entery.getKey().getTitle();
+            }
+
+        } assert(responses.get(responses.size()-1).contains(title));
     }
 }
