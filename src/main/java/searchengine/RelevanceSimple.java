@@ -10,7 +10,7 @@ public class RelevanceSimple implements Relevance {
     private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
     private Map<Page, Double> sort;
 
-    public RelevanceSimple(Map<String, ArrayList<Page>> indexWordsToPages)  {//webserver sends this map after retrieving this form the index
+    public RelevanceSimple(Map<String, ArrayList<Page>> indexWordsToPages)  {   //webserver sends this map after retrieving this form the index
         wordsrelevanceMap = new HashMap<>();
         sort = new HashMap<>();
         makeRelevanceMap(indexWordsToPages); 
@@ -18,7 +18,7 @@ public class RelevanceSimple implements Relevance {
         /**
          * 
          */
-        public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {//calculates the simple relevance for each word for each page
+        public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {   //calculates the simple relevance for each word for each page
             for(String word : mapFromIndex.keySet())    {
                 HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
                 for(Page page : mapFromIndex.get(word)) {
