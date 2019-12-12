@@ -31,7 +31,7 @@ public class WebServer {
   
 
     WebServer(int port, String filename, String relevanceType) {
-      try {
+      
         fileReader = new FileReader(filename); 
       
         index = new IndexHash(fileReader.getAllPages());     
@@ -40,7 +40,7 @@ public class WebServer {
         if(relevanceType.equals("tfidf")) relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
         if(relevanceType.equals("tf"))  relevance = new RelevanceTermFrequency(index.getwordsToPages());
        
-
+        try {
         server = HttpServer.create(new InetSocketAddress(port), BACKLOG); //Creates the server
         server.createContext("/", io -> display(io, 200, "text/html", getFile("web/index.html")));
         server.createContext("/search", io -> search(io));
