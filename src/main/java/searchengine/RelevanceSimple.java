@@ -48,7 +48,8 @@ public class RelevanceSimple implements Relevance {
                 } 
                 String pageTitle = page.getTitle().toLowerCase();
                 if(pageTitle.contains(word)) {
-                    double rlvWithTitle = currentSearchString.get(page) * 2;
+                    double currentWord = wordsrelevanceMap.get(word).get(page);
+                        double rlvWithTitle = currentSearchString.get(page) + currentWord;
                     currentSearchString.put(page, rlvWithTitle);
                 }
                 }
