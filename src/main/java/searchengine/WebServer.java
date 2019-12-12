@@ -26,16 +26,20 @@ public class WebServer {
   
   HttpServer server;
   FileReader fileReader;
-  IndexHash index;
+  Index index;
   Relevance relevance;
   
 
-    WebServer(int port, String filename, String relevanceType) {
+    WebServer(int port, String filename, String indexType, String relevanceType) {
       
         fileReader = new FileReader(filename); 
       
-        index = new IndexHash(fileReader.getAllPages());     
-       
+       // index depending on index interface chosen   
+        if(indexType.equals("list"))  index = new IndexListArray(fileReader.getAllPages());
+        if(indexType.equals("hash"))  index = new IndexHash(fileReader.getAllPages());
+        if(indexType.equals("tree"))  index = new IndexTree(fileReader.getAllPages());
+
+        //Relevance depending on relevance interface chosen
         if(relevanceType.equals("simple"))  relevance = new RelevanceSimple(index.getwordsToPages());
         if(relevanceType.equals("tfidf")) relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
         if(relevanceType.equals("tf"))  relevance = new RelevanceTermFrequency(index.getwordsToPages());
@@ -127,7 +131,7 @@ public class WebServer {
 
       public static void main(String[] args) throws IOException {
         var filename = Files.readString(Paths.get("config.txt")).strip();
-        new WebServer(PORT, filename, "tfidf");
+        new WebServer(PORT, filename,"hash", "tfidf");
         //var webserver = new WebServer(PORT, filename, "hash");
        //webserver.search("word1 word2 OR word2 word4");
       

@@ -5,8 +5,8 @@ public interface Relevance{
 
     
     public void calculatingRelevance(ArrayList<Page> matchesAllWords,String[] words);
-    public void makeRelevanceMap(HashMap<String, ArrayList<Page>> map);
-    public HashMap<Page, Double> getMapOfRelevance();
+    public void makeRelevanceMap(Map<String, ArrayList<Page>> map);
+    public Map<Page, Double> getMapOfRelevance();
     public void clearMap();
     
 }

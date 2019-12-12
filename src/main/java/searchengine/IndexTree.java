@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class IndexTree implements Index {
 
-    private TreeMap<String, ArrayList<Page>> wordsToPages;
+    private Map<String, ArrayList<Page>> wordsToPages;
     private ArrayList<Page> allPages;
 
 
@@ -17,7 +17,7 @@ public class IndexTree implements Index {
         makeHashMap();
     }
 
-    public TreeMap<String, ArrayList<Page>> makeHashMap() {
+    public Map<String, ArrayList<Page>> makeHashMap() {
         for(Page page : allPages) {
             var words = page.getWords();
             for(String word : words)    {
@@ -48,8 +48,7 @@ public class IndexTree implements Index {
         return allPages;
     }
 
-    // public Set<String> returnKeySet()
-    // {
-    //     return wordsToPages.keySet();
-    // }
+    public Map<String, ArrayList<Page>> getwordsToPages()   {
+        return wordsToPages;
+    }
 }

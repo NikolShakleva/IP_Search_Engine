@@ -11,5 +11,6 @@ public interface Index {
 
     public ArrayList<Page> matchingPages(String input);
     public ArrayList<Page> getAllPages();
+    public Map<String, ArrayList<Page>> getwordsToPages();
     //public Set<String> returnKeySet();
 }

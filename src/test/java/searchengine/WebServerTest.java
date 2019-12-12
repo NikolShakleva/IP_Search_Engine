@@ -25,7 +25,7 @@ class WebServerTest {
         var rnd = new Random();
         while (server == null) {
             try {
-                server = new WebServer(rnd.nextInt(60000) + 1024, "filename", "tfidf");
+                server = new WebServer(rnd.nextInt(60000) + 1024, "filename","hash", "tfidf");
             } catch (Exception e) {
                 e.printStackTrace();
             }

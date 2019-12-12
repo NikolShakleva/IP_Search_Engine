@@ -3,15 +3,16 @@ package searchengine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * RelevanceTermFrequency
  */
 public class RelevanceTermFrequency implements Relevance    {
-    private HashMap<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
-    private HashMap<Page, Double> sort;
+    private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
+    private Map<Page, Double> sort;
 
-    public RelevanceTermFrequency(HashMap<String, ArrayList<Page>> indexWordsToPages)   {
+    public RelevanceTermFrequency(Map<String, ArrayList<Page>> indexWordsToPages)   {
         wordsrelevanceMap = new HashMap<>();
         sort = new HashMap<>();
         makeRelevanceMap(indexWordsToPages);
@@ -54,7 +55,7 @@ public class RelevanceTermFrequency implements Relevance    {
         /**
          * 
          */
-	    public void makeRelevanceMap(HashMap<String, ArrayList<Page>> mapFromIndex) {
+	    public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {
             for(String word : mapFromIndex.keySet())    {
                 HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
                 for(Page page : mapFromIndex.get(word)) {
@@ -67,7 +68,7 @@ public class RelevanceTermFrequency implements Relevance    {
             }
 	    }
 
-	    public HashMap<Page, Double> getMapOfRelevance() {
+	    public Map<Page, Double> getMapOfRelevance() {
 		    return sort;
         }
 

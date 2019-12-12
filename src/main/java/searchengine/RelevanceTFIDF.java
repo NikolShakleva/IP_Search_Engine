@@ -3,6 +3,7 @@ package searchengine;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -10,12 +11,12 @@ import java.util.HashMap;
  * RelevanceTFIDF
  */
 public class RelevanceTFIDF implements Relevance {
-    private HashMap<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
-    private HashMap<Page, Double> sort;
-    private HashMap<String, Double> idf;
+    private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
+    private Map<Page, Double> sort;
+    private Map<String, Double> idf;
     private Index index;
 
-    public RelevanceTFIDF(HashMap<String, ArrayList<Page>> indexWordsToPages, Index index) {
+    public RelevanceTFIDF(Map<String, ArrayList<Page>> indexWordsToPages, Index index) {
         wordsrelevanceMap = new HashMap<>();
         sort = new HashMap<>();
         this.index = index;
@@ -27,7 +28,7 @@ public class RelevanceTFIDF implements Relevance {
          * 
          * @param indexWordsToPages
          */
-        public void makeIDF(HashMap<String, ArrayList<Page>> indexWordsToPages){
+        public void makeIDF(Map<String, ArrayList<Page>> indexWordsToPages){
             idf = new HashMap<>();
             for (String word : indexWordsToPages.keySet())  {
                 double numberOfPages = indexWordsToPages.get(word).size();
@@ -38,7 +39,7 @@ public class RelevanceTFIDF implements Relevance {
         /**
          * 
          */
-	    public void makeRelevanceMap(HashMap<String, ArrayList<Page>> mapFromIndex) {
+	    public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {
 		    for(String word : mapFromIndex.keySet())    {
                 HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
                 for(Page page : mapFromIndex.get(word)) {
@@ -87,7 +88,7 @@ public class RelevanceTFIDF implements Relevance {
             }	
 	    }
         
-	    public HashMap<Page, Double> getMapOfRelevance() {
+	    public Map<Page, Double> getMapOfRelevance() {
 		    return sort;
 	    }
 
