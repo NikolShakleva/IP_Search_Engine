@@ -1,10 +1,13 @@
 package searchengine;
 
-
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
+
 
 
 /**
@@ -13,7 +16,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class ResponderTest {
     private RandomGenerator rnd = new RandomGenerator();
-    private ArrayList<Page> correctPages;
+    private Map<Page, Double> correctPages;
 
     /**
      * Setting up random ArrayList<Page> with 5-50 correct pages
@@ -23,9 +26,12 @@ public class ResponderTest {
      */
     @BeforeAll
     public void setUp()   {
-        for(int i = 0 ; i < rnd.generateInt(5, 50) ; i++)  {
+        int i = 0;
+        while(i < 20)   {
+       // for(int i = 0 ; i < rnd.generateInt(5, 50) ; i++)  {
             String title = rnd.generateString();
             String pageUrl = "*PAGE https://www." + title + ".com";
+            double rlv = rnd.generateInt(1, 100);
 
             var words = new ArrayList<String>();
             while(i < rnd.generateInt(5, 50))  {
@@ -33,13 +39,13 @@ public class ResponderTest {
                 words.add(currentWord);
             }
             var page = new Page(pageUrl, title, words);
-            correctPages.add(page);
+            correctPages.put(page, rlv);
         } 
     }
 
-    //@Test
-   /* public void noMatchesFoundInList()  {
-        var emptyList = new ArrayList<Page>();
+    @Test
+    public void noMatchesFoundInList()  {
+        Map<Page, Double> emptyList = new HashMap<>();
         var responder = new Responder(emptyList);
         int responses = responder.getPageNames().size();
 
@@ -53,5 +59,5 @@ public class ResponderTest {
         int list = correctPages.size();
 
         assertEquals(list, responses);
-    }*/
+    }
 }

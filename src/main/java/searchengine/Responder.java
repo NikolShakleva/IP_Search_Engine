@@ -11,10 +11,11 @@ import java.util.*;
  */
 
 public class Responder {
-    private HashMap<Page, Double> correctPages;
-    LinkedHashMap<Page, Double> sortedMap = new LinkedHashMap<>();
+    private Map<Page, Double> correctPages;
+    private LinkedHashMap<Page, Double> sortedMap = new LinkedHashMap<>();
+    private ArrayList<String> response;
 
-    public Responder(HashMap<Page, Double> correctPages){
+    public Responder(Map<Page, Double> correctPages){
         this.correctPages = correctPages;
         
     }
@@ -23,7 +24,7 @@ public class Responder {
         * @return, an ArrayList with pages formatted with URL and Title for the server to display
         */
         public ArrayList<String> getPageNames() {
-            ArrayList<String> response = new ArrayList<>(); 
+            response = new ArrayList<>(); 
             correctPages.entrySet()
             .stream()
             .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) 
