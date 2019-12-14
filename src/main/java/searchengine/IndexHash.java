@@ -21,10 +21,10 @@ public class IndexHash implements Index {
         wordsToPages = new HashMap<>();
         makeHashMap();
     }
-/**
- * Converts the allPages ArrayList from the FileReader to a HashMap<String,ArrayList<Page>> called wordsToPages
- * @return return the wordsToPages HashMap<String,ArrayList<Page>>
- */
+        /**
+        * Converts the allPages ArrayList from the FileReader to a HashMap<String,ArrayList<Page>> called wordsToPages
+        * @return return the wordsToPages HashMap<String,ArrayList<Page>>
+        */
         public HashMap<String, ArrayList<Page>> makeHashMap() {
             for (Page page : allPages) {
                 var words = page.getWords();

@@ -23,14 +23,13 @@ public class IndexListArray implements Index    {
         makeHashMap();
     }
 
-    /**
-     *@return The ArrayList<Page> of all page objects coming from the FileReader class
+        /**
+        *@return The ArrayList<Page> of all page objects coming from the FileReader class
+        */      
      
-     */      
-     
-    public ArrayList<Page> getAllPages()    {
-        return allPages;
-    }
+        public ArrayList<Page> getAllPages()    {
+            return allPages;
+        }
 
         public HashMap<String, ArrayList<Page>> makeHashMap() {
             for (Page page : allPages) {
@@ -47,20 +46,17 @@ public class IndexListArray implements Index    {
                         }
                     }
                 }  
-        } return wordsToPages;
-    }
+            } return wordsToPages;
+        }
 
-     /**
+        /**
          * @return The ArrayList<Page> of all page objects coming from the FileReader class
          */
-    public HashMap<String, ArrayList<Page>> getwordsToPages()   {
-        return wordsToPages;
-    }
+        public HashMap<String, ArrayList<Page>> getwordsToPages()   {
+            return wordsToPages;
+        }
 
-    @Override
-    public ArrayList<Page> matchingPages(String input) {
-        return null;
-    }
-   
-    
+        public ArrayList<Page> matchingPages(String input) {
+            return null;
+        }
 }
