@@ -62,10 +62,5 @@ class WebServerTest {
             e.printStackTrace();
             return null;
         }
-    }/*
-    @Test
-    void checkWebserver()   {
-       assertEquals("[{\"url\": \"http://bulgari.com", \"title\": \"Sofia\", \"Relevance\": \"2\", \"totalWords\": \"5\", \"words\": \"badminton, university, economics, business, economics\"}]", server.search("economics"));
-
-    }*/
+    }
 }
