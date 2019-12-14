@@ -21,7 +21,7 @@ public class FileReader {
      * Initaiates arrayList of pages
      * Read the text file
      * It creates page objects while reading the file.
-     * Stores the page objects into the arrayList of pages
+     * Stores the page objects into the ArrayList of pages
      * @param filename The name of the text file, coming from the WebServer class.
      */
     public FileReader(String filename)  {
