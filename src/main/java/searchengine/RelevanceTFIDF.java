@@ -9,6 +9,10 @@ import java.util.Map;
 
 /**
  * RelevanceTFIDF
+ * 
+ * @author
+ * @version
+ * 
  */
 public class RelevanceTFIDF implements Relevance {
     private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
