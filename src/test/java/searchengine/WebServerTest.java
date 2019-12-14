@@ -26,7 +26,7 @@ class WebServerTest {
         var rnd = new Random();
         while (server == null) {
             try {
-                server = new WebServer(rnd.nextInt(60000) + 1024, "filename","hash", "tfidf");
+                server = new WebServer(rnd.nextInt(60000) + 1024, "test-file.txt","hash", "simple");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -42,11 +42,11 @@ class WebServerTest {
     @Test
     void lookupWebServer() {
         String baseURL = String.format("http://localhost:%d/search?q=", server.server.getAddress().getPort());
-        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\"}]", 
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
             httpGet(baseURL + "word1"));
-        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\"}]",
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}]",
             httpGet(baseURL + "word2"));
-        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\"}]", 
+        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
             httpGet(baseURL + "word3"));
         assertEquals("[]", 
             httpGet(baseURL + "word4"));
@@ -62,5 +62,10 @@ class WebServerTest {
             e.printStackTrace();
             return null;
         }
-    }
+    }/*
+    @Test
+    void checkWebserver()   {
+       assertEquals("[{\"url\": \"http://bulgari.com", \"title\": \"Sofia\", \"Relevance\": \"2\", \"totalWords\": \"5\", \"words\": \"badminton, university, economics, business, economics\"}]", server.search("economics"));
+
+    }*/
 }
