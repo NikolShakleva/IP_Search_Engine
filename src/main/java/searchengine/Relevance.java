@@ -2,7 +2,9 @@ package searchengine;
 import java.util.*;
 /** 
  * 
+ * Interface
  * 
+ * Calculating relevance for pages that fits the searchterm.
  * 
 */
 public interface Relevance{
