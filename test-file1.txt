@@ -2,7 +2,9 @@
 title1
 word1
 word2
+word1
 *PAGE:http://page2.com
 title2
 word1
+word3
 word3

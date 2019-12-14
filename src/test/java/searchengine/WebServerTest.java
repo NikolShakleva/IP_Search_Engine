@@ -12,41 +12,55 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Random;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 
 @TestInstance(Lifecycle.PER_CLASS)
 class WebServerTest {
-    WebServer server = null;
 
-    @BeforeAll
-    void setUp() {
-        var rnd = new Random();
-        while (server == null) {
-            try {
-                server = new WebServer(rnd.nextInt(60000) + 1024, "test-file.txt","hash", "simple");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    @Test
+    void lookupWebServerWithSimple() {
 
-    @AfterAll
-    void tearDown() {
-        server.server.stop(0);
-        server = null;
+          var  server = new WebServer(8080, "test-file1.txt","hash", "simple");
+    
+        String baseURL = String.format("http://localhost:%d/search?q=", server.server.getAddress().getPort());
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"2.0\", \"totalWords\": \"3\", \"words\": \"[word1, word2, word1]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"1.0\", \"totalWords\": \"3\", \"words\": \"[word1, word3, word3]\"}]", 
+            httpGet(baseURL + "word1"));
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"1.0\", \"totalWords\": \"3\", \"words\": \"[word1, word2, word1]\"}]",
+            httpGet(baseURL + "word2"));
+        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"2.0\", \"totalWords\": \"3\", \"words\": \"[word1, word3, word3]\"}]", 
+            httpGet(baseURL + "word3"));
+        assertEquals("[]", 
+            httpGet(baseURL + "word4"));
     }
 
     @Test
-    void lookupWebServer() {
+    void lookupWebServerWithTf() {
+   
+                var server = new WebServer(8080, "test-file1.txt","hash", "tf");
+    
         String baseURL = String.format("http://localhost:%d/search?q=", server.server.getAddress().getPort());
-        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"0.6666666666666666\", \"totalWords\": \"3\", \"words\": \"[word1, word2, word1]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"0.3333333333333333\", \"totalWords\": \"3\", \"words\": \"[word1, word3, word3]\"}]", 
             httpGet(baseURL + "word1"));
-        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}]",
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"0.3333333333333333\", \"totalWords\": \"3\", \"words\": \"[word1, word2, word1]\"}]",
             httpGet(baseURL + "word2"));
-        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"1.0\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
+        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"0.6666666666666666\", \"totalWords\": \"3\", \"words\": \"[word1, word3, word3]\"}]", 
+            httpGet(baseURL + "word3"));
+        assertEquals("[]", 
+            httpGet(baseURL + "word4"));
+    }
+
+    @Test
+    void lookupWebServerWithTFIDF() {
+      var server = new WebServer(8080, "test-file1.txt","hash", "tfidf");
+    
+        String baseURL = String.format("http://localhost:%d/search?q=", server.server.getAddress().getPort());
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"0.0\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"0.0\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
+            httpGet(baseURL + "word1"));
+        assertEquals("[{\"url\": \"http://page1.com\", \"title\": \"title1\", \"relevance\": \"0.34657359027997264\", \"totalWords\": \"2\", \"words\": \"[word1, word2]\"}]",
+            httpGet(baseURL + "word2"));
+        assertEquals("[{\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"0.34657359027997264\", \"totalWords\": \"2\", \"words\": \"[word1, word3]\"}]", 
             httpGet(baseURL + "word3"));
         assertEquals("[]", 
             httpGet(baseURL + "word4"));
