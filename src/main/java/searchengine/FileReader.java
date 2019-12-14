@@ -61,7 +61,7 @@ public class FileReader {
                     }
                 }     
             } catch (FileNotFoundException e) {
-                System.out.println("File could not be found, check you spekking and try again");
+                System.out.println("File could not be found, check you spelling and try again");
                 e.printStackTrace();   
             }  
         }

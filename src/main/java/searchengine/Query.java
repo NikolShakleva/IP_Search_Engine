@@ -4,7 +4,6 @@ import java.util.*;
 /**
  * Class Query -  It takes String input from the users of the WebServer.
  * It retrieves the pages matching matching the input String with their relevant relevance score 
- * It creates  page objects.
  * @author Emelie, Ewa, Nikol, Philip
  * @version 2019.11.24
  * 
