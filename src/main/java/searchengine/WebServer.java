@@ -13,8 +13,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
 /**
- * WebServer
- * 
+ * WebServer class - It recieves a search request from the user and sends back a list of responses correspindig to the user search
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24
  * 
@@ -82,7 +81,7 @@ public class WebServer {
       }
 
       /**
-      * Searches for search input in library
+      * Searches for search input in index database 
       * 
       * @param io, HttpExchange
       */

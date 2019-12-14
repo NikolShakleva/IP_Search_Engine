@@ -4,29 +4,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * indexList
+ * Class IndexArrayList - Stores all page objects from the file in an ArrayList<Page>
+ * @author Emelie, Ewa, Nikol, Philip
+ * @version 2019.11.24
+ * 
  */
 public class IndexListArray implements Index    {
     private HashMap<String, ArrayList<Page>> wordsToPages;
     private ArrayList<Page> allPages;
 
+
+    /**
+     * Stores all page object in an ArrayList<Page>
+     * @param allPages The ArrayList<Page> of allPages passed from the FileReader class
+     */
     public IndexListArray(ArrayList<Page> allPages)  {
         this.allPages = allPages;
         makeHashMap();
     }
 
-        public ArrayList<Page> matchingPages(String input) {
-            ArrayList<Page> matchingPages = new ArrayList<Page>();
-            for (Page page: allPages){
-                if(page.getWords().contains(input)) {
-                    matchingPages.add(page);
-            }   }  
-            return matchingPages;
-        }
-
-        public ArrayList<Page> getAllPages()    {
-            return allPages;
-        }
+    /**
+     *@return The ArrayList<Page> of all page objects coming from the FileReader class
+     
+     */      
+     
+    public ArrayList<Page> getAllPages()    {
+        return allPages;
+    }
 
         public HashMap<String, ArrayList<Page>> makeHashMap() {
             for (Page page : allPages) {
@@ -42,14 +46,21 @@ public class IndexListArray implements Index    {
                             list.add(page);
                         }
                     }
-                }
-            }
-            return wordsToPages;
-        }
+                }  
+        } return wordsToPages;
+    }
 
-        public HashMap<String, ArrayList<Page>> getwordsToPages()   {
-            return wordsToPages;
-        }
+     /**
+         * @return The ArrayList<Page> of all page objects coming from the FileReader class
+         */
+    public HashMap<String, ArrayList<Page>> getwordsToPages()   {
+        return wordsToPages;
+    }
+
+    @Override
+    public ArrayList<Page> matchingPages(String input) {
+        return null;
+    }
    
     
 }

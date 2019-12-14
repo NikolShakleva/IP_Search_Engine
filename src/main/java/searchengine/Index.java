@@ -2,7 +2,7 @@ package searchengine;
 import java.util.*;
 
 /**
- * Library
+ * Index
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.11.24

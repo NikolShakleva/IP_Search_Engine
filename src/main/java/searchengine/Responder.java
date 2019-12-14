@@ -3,9 +3,9 @@ package searchengine;
 import java.util.*;
 
 /**
- * Responder
- * 
- * @author Ewa, Emelie, Nikol, Philip
+ * Class Responder - It retreieves the pages matching the search term fro the Query class.
+ * It formats and and sends the list of correct pages for the server to display 
+ * @author Emelie, Ewa, Nikol, Philip
  * @version 2019.11.24
  * 
  */
@@ -14,7 +14,10 @@ public class Responder {
     private Map<Page, Double> correctPages;
     private LinkedHashMap<Page, Double> sortedMap = new LinkedHashMap<>();
     private ArrayList<String> response;
-
+/**
+ * Creates an ArrayList<Page> of matching pages
+ * @param correctPages The ArrayList<Page> of pages matching the searh term inserted from the user in the Query class
+ */
     public Responder(Map<Page, Double> correctPages){
         this.correctPages = correctPages;
         
