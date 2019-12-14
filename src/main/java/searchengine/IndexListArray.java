@@ -20,7 +20,6 @@ public class IndexListArray implements Index    {
      */
     public IndexListArray(ArrayList<Page> allPages)  {
         this.allPages = allPages;
-        makeHashMap();
     }
 
         /**
@@ -29,24 +28,6 @@ public class IndexListArray implements Index    {
      
         public ArrayList<Page> getAllPages()    {
             return allPages;
-        }
-
-        public HashMap<String, ArrayList<Page>> makeHashMap() {
-            for (Page page : allPages) {
-                var words = page.getWords();
-                for (String word : words) {
-                    if (!wordsToPages.containsKey(word)) {
-                        var list = new ArrayList<Page>();
-                        list.add(page);
-                        wordsToPages.put(word, list);
-                    } else if (wordsToPages.containsKey(word)) {
-                        var list = wordsToPages.get(word);
-                        if (!list.contains(page)) {
-                            list.add(page);
-                        }
-                    }
-                }  
-            } return wordsToPages;
         }
 
         /**
