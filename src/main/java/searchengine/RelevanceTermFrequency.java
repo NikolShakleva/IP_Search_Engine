@@ -62,7 +62,7 @@ public class RelevanceTermFrequency implements Relevance    {
                 for(Page page : mapFromIndex.get(word)) {
                     ArrayList<String> words = page.getWords();
                     double wordRelevence = Collections.frequency(words, word);
-                    double termFrequency = (wordRelevence / words.size()) * 100000;
+                    double termFrequency = (wordRelevence / words.size());
                     hashmapRelevanceValue.put(page, termFrequency);
                 }
                 wordsrelevanceMap.put(word, hashmapRelevanceValue);
