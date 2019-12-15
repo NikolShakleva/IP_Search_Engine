@@ -10,15 +10,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
+/**
+ * WebServer class - It recieves a search request from the user and sends back a list of responses correspindig to the user search
+ * @author Ewa, Emelie, Nikol, Philip
+ * @version 2019.12.16
+ * 
+ */
+
 public class IndexHashTest {
 
     ArrayList<Page> allPages = new ArrayList<>();
     
     /**
-     * Setting up random ArrayList<Page> with 5-50 correct pages
-     * This list should be handed to the responder by the WebServer
+     * Setting up an ArrayList<Page> with 11 correct pages
+     * This list should be handed to the Index
      * 
-     * Pages will be made with a url, title and ArrayList of 2-50 words
+     * Pages will be made with a url, title and ArrayList of 1-3 words
      */
     @BeforeEach
     public void setUp()   {
