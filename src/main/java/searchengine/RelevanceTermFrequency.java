@@ -12,15 +12,23 @@ public class RelevanceTermFrequency implements Relevance    {
     private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
     private Map<Page, Double> sort;
 
+    
+    /** 
+     * @param indexWordsToPages
+     * @return 
+     */
     public RelevanceTermFrequency(Map<String, ArrayList<Page>> indexWordsToPages)   {
         wordsrelevanceMap = new HashMap<>();
         sort = new HashMap<>();
         makeRelevanceMap(indexWordsToPages);
     }
-        /**
-         * 
+       
+	    
+        /** 
+         * @param matchesAllWords
+         * @param words
          */
-	    public void calculatingRelevance(ArrayList<Page> matchesAllWords, String[] words) {
+        public void calculatingRelevance(ArrayList<Page> matchesAllWords, String[] words) {
             HashMap<Page, Double> currentSearchString = new HashMap<>();
             for(String word : words) {  
                 HashMap <Page, Double> currentwords = wordsrelevanceMap.get(word);
@@ -53,10 +61,12 @@ public class RelevanceTermFrequency implements Relevance    {
                 } 
             }	
 	    }   
-        /**
-         * 
+        
+	    
+        /** 
+         * @param mapFromIndex
          */
-	    public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {
+        public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {
             for(String word : mapFromIndex.keySet())    {
                 HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
                 for(Page page : mapFromIndex.get(word)) {
@@ -69,7 +79,11 @@ public class RelevanceTermFrequency implements Relevance    {
             }
 	    }
 
-	    public Map<Page, Double> getMapOfRelevance() {
+	    
+        /** 
+         * @return Map<Page, Double>
+         */
+        public Map<Page, Double> getMapOfRelevance() {
 		    return sort;
         }
 
