@@ -3,6 +3,7 @@ package searchengine;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,11 +19,14 @@ public class RelevanceTFIDFTest {
 
     String[] first = {"word1"};
     String[] second = {"word2"};
+    String[] third = {"word1", "word2"};
+    String[] fourth = {"word1", "word3"};
 
     IndexHash index;
     RelevanceTFIDF rlv;
     ArrayList<Page> allPages = new ArrayList<>();
     Responder responder;
+    Query query;
 
 
     public RelevanceTFIDFTest(){
@@ -47,6 +51,7 @@ public class RelevanceTFIDFTest {
         allPages.add(page3);
         index = new IndexHash(allPages);
         rlv = new RelevanceTFIDF(index.getwordsToPages(), index);
+        query = new Query("word1 word2 OR word2 word3", index, rlv);
 
 }
     @AfterEach
@@ -84,5 +89,23 @@ public class RelevanceTFIDFTest {
 
         assertEquals(("[{\"url\": \"http://page1.com\", \"title\": \"word1\", \"relevance\": \"0.5406201441442191\", \"totalWords\": \"3\", \"words\": \"[word1, word2, word1]\"}, {\"url\": \"http://page2.com\", \"title\": \"title2\", \"relevance\": \"0.13515503603605478\", \"totalWords\": \"3\", \"words\": \"[word1, word3, word3]\"}]"),
     resultOrderd.toString());
+}
+@Test
+void checkaWithORTFIDF() {
+    ArrayList<String[]> list = new ArrayList<>();
+    list.add(third);
+    list.add(fourth);
+    query.getKeyPages(list);
+    var pages = query.getCorrectPages();
+    ArrayList<String> result = new ArrayList<>();
+    for(var page : pages.keySet())  {
+        double currentRelevance = pages.get(page);
+        String url = page.getUrl();
+        result.add(url + " = Relevance: " + currentRelevance);
+    }
+    Collections.sort(result);
+    assertEquals("[http://page1.com = Relevance: 1.0812402882884382, http://page2.com = Relevance: 0.27031007207210955]",
+        result.toString());
+
 }
 }

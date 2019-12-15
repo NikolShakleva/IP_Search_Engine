@@ -27,16 +27,22 @@ public class IndexTree implements Index {
         * @return return the wordsToPages TreeMap<String,ArrayList<Page>>
         */
         public Map<String, ArrayList<Page>> makeTreeMap() {
-            for(Page page : allPages) {
+            for (Page page : allPages) {
                 var words = page.getWords();
-                for(String word : words)    {
-                    if(!wordsToPages.containsKey(word)){
+                for (String word : words) {
+                    if (!wordsToPages.containsKey(word)) {
                         var list = new ArrayList<Page>();
                         list.add(page);
                         wordsToPages.put(word, list);
+                    } else if (wordsToPages.containsKey(word)) {
+                        var list = wordsToPages.get(word);
+                        if (!list.contains(page)) {
+                            list.add(page);
+                        }
                     }
-                } 
-            } return wordsToPages;
+                }
+            }
+            return wordsToPages;
         }
 
          /**
