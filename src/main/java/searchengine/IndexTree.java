@@ -3,7 +3,7 @@ package searchengine;
 import java.util.*;
 
 /**
- * Class IndexTree - Stores all page objects from the file in a TreeMap<String,ArrayList<Page>>
+ * Class IndexTree - Stores all page objects from the file in a TreeMap where the key is String and the value is ArrayList of Page objects
  * @author Emelie, Ewa, Nikol, Philip
  * @version 2019.11.24
  * 
@@ -15,7 +15,7 @@ public class IndexTree implements Index {
 
      /**
      * Creates a TreeMap which stores all page objects
-     * @param allPages The ArrayList<Page> of allPages passed from the FileReader class
+     * @param allPages The ArrayList of Page objects of allPages passed from the FileReader class
      */
     public IndexTree(ArrayList<Page> allPages)  {
         this.allPages = allPages;
@@ -23,8 +23,8 @@ public class IndexTree implements Index {
         makeTreeMap();
     }
         /**
-        * Converts the allPages ArrayList from the FileReader to a TreeMap<String,ArrayList<Page>> called wordsToPages
-        * @return return the wordsToPages TreeMap<String,ArrayList<Page>>
+        * Converts the allPages ArrayList from the FileReader to a TreeMap called wordsToPages
+        * @return return the wordsToPages TreeMap
         */
         public Map<String, ArrayList<Page>> makeTreeMap() {
             for (Page page : allPages) {
@@ -46,9 +46,9 @@ public class IndexTree implements Index {
         }
 
          /**
-        * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList<Page>
+        * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList of Page object
         * @param input String input coming from the Query class representing a key of the wordsToPages map
-        * @return  The values of the corresponding key as an ArrayList<Page>
+        * @return  The values of the corresponding key as an ArrayList of Page objects
         */
         public ArrayList<Page> matchingPages(String input)   {
             ArrayList<Page> matchingPages = new ArrayList<Page>();
@@ -58,14 +58,14 @@ public class IndexTree implements Index {
         }
 
         /**
-        * @return The ArrayList<Page> of all page objects coming from the FileReader class
+        * @return The ArrayList of Page objects of all page objects coming from the FileReader class
         */
         public ArrayList<Page> getAllPages()  {
             return allPages;
         }
 
         /**
-        * @return the TreeMap<String,ArrayList<Page>> mapping words to page objects
+        * @return TreeMap mapping words to page objects
         */
         public Map<String, ArrayList<Page>> getwordsToPages()   {
             return wordsToPages;

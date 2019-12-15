@@ -64,7 +64,7 @@ public class RelevanceTFIDF implements Relevance {
 
         /** 
          * Calculates the relevance for each page that is being send to the responder
-         * @param matchesAllWords ArrayList<Page> that is being send to the Responder
+         * @param matchesAllWords ArrayList of Page objects that is being send to the Responder
          * @param words String[], Array of key words
          */
         public void calculatingRelevance(ArrayList<Page> matchesAllWords, String[] words) {
@@ -102,7 +102,7 @@ public class RelevanceTFIDF implements Relevance {
 	    }
 	    
         /** 
-         * @return Map<Page, Double>, a Map of Page objects and its relevance values
+         * @return a Map of Page objects and its relevance values
          */
         public Map<Page, Double> getMapOfRelevance() {
 		    return sort;

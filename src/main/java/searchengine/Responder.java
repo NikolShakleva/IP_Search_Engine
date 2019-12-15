@@ -15,8 +15,8 @@ public class Responder {
     private LinkedHashMap<Page, Double> sortedMap = new LinkedHashMap<>();
     private ArrayList<String> response;
 /**
- * Creates an ArrayList<Page> of matching pages
- * @param correctPages The ArrayList<Page> of pages matching the searh term inserted from the user in the Query class
+ * Creates an ArrayList of Page objects matching pages
+ * @param correctPages The ArrayList of Page objects is matching the searh term inserted from the user in the Query class
  */
     public Responder(Map<Page, Double> correctPages){
         this.correctPages = correctPages;

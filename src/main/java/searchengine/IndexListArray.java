@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Class IndexArrayList - Stores all page objects from the file in an ArrayList<Page>
+ * Class IndexArrayList - Stores all page objects from the file in an ArrayList of Page objects
  * @author Emelie, Ewa, Nikol, Philip
  * @version 2019.11.24
  * 
@@ -15,15 +15,15 @@ public class IndexListArray implements Index    {
 
 
     /**
-     * Stores all page object in an ArrayList<Page>
-     * @param allPages The ArrayList<Page> of allPages passed from the FileReader class
+     * Stores all page object in an ArrayList
+     * @param allPages The ArrayList of allPages passed from the FileReader class
      */
     public IndexListArray(ArrayList<Page> allPages)  {
         this.allPages = allPages;
     }
 
         /**
-        *@return The ArrayList<Page> of all page objects coming from the FileReader class
+        *@return The ArrayList of all page objects coming from the FileReader class
         */      
      
         public ArrayList<Page> getAllPages()    {
@@ -31,7 +31,7 @@ public class IndexListArray implements Index    {
         }
 
         /**
-         * @return The ArrayList<Page> of all page objects coming from the FileReader class
+         * @return The ArrayList of Page objects of all page objects coming from the FileReader class
          */
         public HashMap<String, ArrayList<Page>> getwordsToPages()   {
             return wordsToPages;

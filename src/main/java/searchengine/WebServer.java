@@ -32,9 +32,9 @@ public class WebServer {
     
     /** 
      * explenation
-     * @param port
-     * @param filename
-     * @param indexType
+     * @param port port
+     * @param filename the name of file
+     * @param indexType the type of index
      * @param relevanceType the way of calculating relevance
      */
     public WebServer(int port, String filename, String indexType, String relevanceType) {

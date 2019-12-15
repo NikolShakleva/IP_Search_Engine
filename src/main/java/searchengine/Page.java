@@ -17,7 +17,7 @@ public class Page   {
  * Create a page object based on the paramerts passed to the constructor
  * @param pageUrl Creates the page URL as a String
  * @param pageTitle Creates the page title as a String
- * @param words Creates a list of words contained in a page as ArrayList<String>
+ * @param words Creates a list of words contained in a page as ArrayList of String
  */
     public Page(String pageUrl, String pageTitle, ArrayList<String> words){
         this.title = pageTitle;

@@ -14,7 +14,7 @@ public class IndexHash implements Index {
 
     /**
      * Creates a HashMap which stores all page objects
-     * @param allPages The ArrayList<Page> of allPages passed from the FileReader class
+     * @param allPages The ArrayList of Page objects of allPages passed from the FileReader class
      */
     public IndexHash(ArrayList<Page> allPages) {
         this.allPages = allPages;
@@ -22,8 +22,8 @@ public class IndexHash implements Index {
         makeHashMap();
     }
         /**
-        * Converts the allPages ArrayList from the FileReader to a HashMap<String,ArrayList<Page>> called wordsToPages
-        * @return return the wordsToPages HashMap<String,ArrayList<Page>>
+        * Converts the allPages ArrayList from the FileReader to a HashMap where the key is a String object and the value is ArrayList of Page objects called wordsToPages
+        * @return return the wordsToPages HashMap where the key is a String object and the value is ArrayList of Page objects
         */
         public HashMap<String, ArrayList<Page>> makeHashMap() {
             for (Page page : allPages) {
@@ -45,9 +45,9 @@ public class IndexHash implements Index {
         }
 
         /**
-         * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList<Page>
+         * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList of Page objects
          * @param input String input coming from the Query class representing a key of the wordsToPages map
-         * @return  The values of the corresponding key as an ArrayList<Page>
+         * @return  The values of the corresponding key as an ArrayList of Page objects
          */
     
         public ArrayList<Page> matchingPages(String input)   {
@@ -58,13 +58,13 @@ public class IndexHash implements Index {
             return matchingPages;
         }
         /**
-         * @return The ArrayList<Page> of all page objects coming from the FileReader class
+         * @return The ArrayList of Page objects of all page objects coming from the FileReader class
          */
         public ArrayList<Page> getAllPages()  {
             return allPages;
         }
         /**
-         * @return the HashMap<String,ArrayList<Page>> mapping words to page objects
+         * @return the wordsToPage map contains of String as its keys and ArrayList of Page objects as its values.
          */
         public HashMap<String, ArrayList<Page>> getwordsToPages()   {
             return wordsToPages;
