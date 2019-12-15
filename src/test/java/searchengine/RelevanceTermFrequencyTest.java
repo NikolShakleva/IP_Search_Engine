@@ -2,7 +2,10 @@ package searchengine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,12 +15,12 @@ import org.junit.jupiter.api.Test;
 /**
  * RelevanceTFIDFTest
  */
-public class RelevanceTFIDFTest {
+public class RelevanceTermFrequencyTest {
 
     String[] first = {"word1"};
     String[] second = {"word2"};
     IndexHash index;
-    RelevanceTFIDF rlv;
+    RelevanceTermFrequency rlv;
     ArrayList<String> word1 = new ArrayList<>(){{
         add("word1");
         add("word2");
@@ -35,9 +38,6 @@ public class RelevanceTFIDFTest {
     ArrayList<Page> allPages = new ArrayList<>();
 
 
-    public RelevanceTFIDFTest(){
-    }
-
     @BeforeEach
     public void Setup(){
        
@@ -48,7 +48,7 @@ public class RelevanceTFIDFTest {
         allPages.add(page2);
         allPages.add(page3);
         index = new IndexHash(allPages);
-        rlv = new RelevanceTFIDF(index.getwordsToPages(), index);
+        rlv = new RelevanceTermFrequency(index.getwordsToPages());
 
 }
     @AfterEach
@@ -57,7 +57,7 @@ public class RelevanceTFIDFTest {
     }
 
     @Test
-    void checkOne(){ 
+    void checkOneTF(){ 
         var this1 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
         var result = rlv.getMapOfRelevance();
@@ -70,12 +70,12 @@ public class RelevanceTFIDFTest {
             showResult = showResult + "{ Url: " + url + ", Title: " + title + ", Words: " + words + ", Relevance: " + relevance + "}";
         }
 
-    assertEquals("{ Url: http://page1.com, Title: word1, Words: [word1, word2, word1], Relevance: 0.5406201441442191}", 
+    assertEquals("{ Url: http://page1.com, Title: word1, Words: [word1, word2, word1], Relevance: 1.3333333333333333}", 
     showResult);
     }
 
     @Test
-    void check2WordBlocksAndTheRlvTFIDF() {
+    void check2WordBlocksAndTheRlvTF() {
         var this1 = index.matchingPages("word1");
         var this2 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
@@ -90,7 +90,7 @@ public class RelevanceTFIDFTest {
             showResult = showResult + "{ Url: " + url + ", Title: " + title + ", Words: " + words + ", Relevance: " + relevance + "}";
         }
 
-    assertEquals("{ Url: http://page2.com, Title: title2, Words: [word1, word3, word3], Relevance: 0.13515503603605478}{ Url: http://page1.com, Title: word1, Words: [word1, word2, word1], Relevance: 0.5406201441442191}", 
+    assertEquals("{ Url: http://page2.com, Title: title2, Words: [word1, word3, word3], Relevance: 0.3333333333333333}{ Url: http://page1.com, Title: word1, Words: [word1, word2, word1], Relevance: 1.3333333333333333}", 
     showResult);
 }
 }

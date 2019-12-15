@@ -52,7 +52,7 @@ class WebServerTest {
     void lookupWebServerWithTf() {
         var rnd = new Random();
         while (server == null) {
-            server = new WebServer(rnd.nextInt(60000) + 1024, "data/test-file.txt", "tree", "tf");
+            server = new WebServer(rnd.nextInt(60000) + 1024, "data/test-file.txt", "hash", "tf");
         }
     
         String baseURL = String.format("http://localhost:%d/search?q=", server.server.getAddress().getPort());

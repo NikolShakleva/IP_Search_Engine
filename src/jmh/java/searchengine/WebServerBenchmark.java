@@ -42,7 +42,7 @@ public class WebServerBenchmark {
     }
 
     @Benchmark 
-    public ArrayList<Page> measureAvgTime() throws InterruptedException {
+    public ArrayList<Page> measureAvgTime() {
 
         ArrayList<Page> allPages = new ArrayList<>();
         for(String word : randomWords)  {
