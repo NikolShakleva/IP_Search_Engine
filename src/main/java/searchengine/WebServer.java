@@ -29,7 +29,15 @@ public class WebServer {
   Relevance relevance;
   
 
-    WebServer(int port, String filename, String indexType, String relevanceType) {
+    
+    /** 
+     * explenation
+     * @param port
+     * @param filename
+     * @param indexType
+     * @param relevanceType the way of calculating relevance
+     */
+    public WebServer(int port, String filename, String indexType, String relevanceType) {
       
         fileReader = new FileReader(filename); 
       
