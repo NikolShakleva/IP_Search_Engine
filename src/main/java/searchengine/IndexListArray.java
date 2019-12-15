@@ -38,6 +38,16 @@ public class IndexListArray implements Index    {
         }
 
         public ArrayList<Page> matchingPages(String input) {
-            return null;
+            ArrayList<Page> matchingPage = new ArrayList<>();
+            for(Page page : allPages){
+              ArrayList<String> words =  page.getWords();
+              for(String word : words){
+                  if(word.equals(input)){
+                      if(!matchingPage.contains(page))
+                      matchingPage.add(page);
+                  }
+              }
+            }
+            return matchingPage ;
         }
 }
