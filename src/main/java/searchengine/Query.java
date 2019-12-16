@@ -32,6 +32,7 @@ public class Query {
             var searchTermsGrouped = new ArrayList<String[]>();
             String[] arrayOfOR = searchTerm.split("%20OR%20");
             for(String array : arrayOfOR) { 
+                array = array.toLowerCase();
                 String[] arrayPairingWords = array.split("%20");
                 searchTermsGrouped.add(arrayPairingWords); 
             }                                              
@@ -46,7 +47,6 @@ public class Query {
                 ArrayList<Page> matchingPagesfromIndex = new ArrayList<>();
                 ArrayList<Page> matchesAllWords = new ArrayList<>();
                 for(String word : words) {
-                    word.toLowerCase();
                     matchingPagesfromIndex.addAll(index.matchingPages(word)); 
                 }
                 for(Page page : matchingPagesfromIndex) {  
