@@ -39,12 +39,12 @@ public class WebServer {
       
         fileReader = new FileReader(filename); 
       
-       // index depending on index interface chosen   
+       // index depending on index interface chosen in webserver parameter 
         if(indexType.equals("list"))  index = new IndexListArray(fileReader.getAllPages());
         if(indexType.equals("hash"))  index = new IndexHash(fileReader.getAllPages());
         if(indexType.equals("tree"))  index = new IndexTree(fileReader.getAllPages());
 
-        //Relevance depending on relevance interface chosen
+        //Relevance depending on relevance interface chosen in webserver parameter
         if(relevanceType.equals("simple"))  relevance = new RelevanceSimple(index.getwordsToPages());
         if(relevanceType.equals("tfidf")) relevance = new RelevanceTFIDF(index.getwordsToPages(), index);
         if(relevanceType.equals("tf"))  relevance = new RelevanceTermFrequency(index.getwordsToPages());
@@ -133,7 +133,7 @@ public class WebServer {
 
       public static void main(String[] args) {
         try {
-          
+
         var filename = Files.readString(Paths.get("config.txt")).strip();
         new WebServer(PORT, filename,"hash", "tfidf");
 
