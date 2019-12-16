@@ -72,8 +72,7 @@ public class WebServer {
     }
 
       /**
-       * creates readable content of file for server in bytes
-       * 
+       * Creates readable content of file for server in bytes
        * @param filename, name of file to be translated into bytes
        * @return file translated to bytes
        */
@@ -88,7 +87,6 @@ public class WebServer {
 
       /**
       * Searches for search input in index database 
-      * 
       * @param io, HttpExchange
       */
       public void search(HttpExchange io) {  
@@ -101,8 +99,7 @@ public class WebServer {
       }
 
       /**
-       * creates a response for search input
-       * 
+       * Generates a response for search input
        * @param io, HttpExchange
        * @param correctPages, ArrayList of results matching the SearchWord
        */
@@ -116,7 +113,6 @@ public class WebServer {
 
       /**
        * Displays the response on the server
-       * 
        * @param io, HttpExchange
        * @param code, integer
        * @param mime, String(application/json)
