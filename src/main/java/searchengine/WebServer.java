@@ -27,15 +27,13 @@ public class WebServer {
   FileReader fileReader;
   Index index;
   Relevance relevance;
-  
-
-    
+      
     /** 
-     * explenation
+     * Initiates the Index, Relevance, Filerader and Server objects
      * @param port port
      * @param filename the name of file
      * @param indexType the type of index
-     * @param relevanceType the way of calculating relevance
+     * @param relevanceType the type of relevance
      */
     public WebServer(int port, String filename, String indexType, String relevanceType) {
       
@@ -103,7 +101,7 @@ public class WebServer {
       }
 
       /**
-       * cretes a response for search input
+       * creates a response for search input
        * 
        * @param io, HttpExchange
        * @param correctPages, ArrayList of results matching the SearchWord
