@@ -1,9 +1,6 @@
 package searchengine;
 
-import java.io.IOException;
-import java.net.BindException;
-import java.util.List;
-import java.util.Random;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -20,32 +17,37 @@ import org.openjdk.jmh.annotations.State;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class WebServerBenchmark {
-    WebServer server;
-    List<String> hitSearchTerms;
-    List<String> missSearchTerms;
 
+    FileReader fr;
+    Index index;
+    private String[] randomWords = {"denmark", "sweden", "usa", "poland", "ocean", 
+                                    "sand", "okrjhsuer", "bumblebee", "honeybee", "and", 
+                                    "or", "random", "asian", "done", "with", 
+                                    "task", "aaabbbcccc", "conceive", "network", "mess" };
+ 
     @Param({"data/enwiki-tiny.txt", "data/enwiki-small.txt", "data/enwiki-medium.txt", "data/enwiki-large.txt"})
     String filename;
 
+    @Param({"list", "hash", "map"})
+    String ix;
+
     @Setup(Level.Trial)
     public void setup() {
-        try {
-            var rnd = new Random();
-            while (server == null) {
-                try {
-                    server = new WebServer(rnd.nextInt(60000) + 1024, filename);
-                } catch (BindException e) {
-                    // port in use. Try again
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fr = new FileReader(filename);
+        if(ix.equals("list"))      index = new IndexListArray(fr.getAllPages());                         
+       
+       else if(ix.equals("hash"))   index = new IndexHash(fr.getAllPages());     
+         
+       else if (ix.equals("map"))   index = new IndexTree(fr.getAllPages());   
     }
-    
-    @Benchmark
-    public List<List<String>> measureAvgTime() throws InterruptedException {
-        // Probably not a good idea to search for the same thing all the time... oh well
-        return server.search("denmark");
+
+    @Benchmark 
+    public ArrayList<Page> measureAvgTime() {
+
+        ArrayList<Page> allPages = new ArrayList<>();
+        for(String word : randomWords)  {
+        allPages.addAll(index.matchingPages(word));
+        
+        } return allPages;       
     }
 }
