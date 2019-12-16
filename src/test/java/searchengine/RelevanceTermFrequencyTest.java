@@ -59,7 +59,7 @@ public class RelevanceTermFrequencyTest {
     }
 
     @Test
-    void checkOneTF(){ 
+    void checkOneWordRelevanceTF(){ 
         var this1 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
         var result = rlv.getMapOfRelevance();
@@ -77,7 +77,7 @@ public class RelevanceTermFrequencyTest {
     }
 
     @Test
-    void check2WordBlocksAndTheRlvTF() {
+    void check2WordBlocksRelevanceTF() {
         var this1 = index.matchingPages("word1");
         var this2 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
@@ -90,7 +90,7 @@ public class RelevanceTermFrequencyTest {
     resultOrderd.toString());
 }
 @Test
-void checkaWithORTF() {
+void checkaWithORRelevanceTF() {
     ArrayList<String[]> list = new ArrayList<>();
     list.add(third);
     list.add(fourth);

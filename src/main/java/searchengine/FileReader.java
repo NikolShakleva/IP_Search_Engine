@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
-<<<<<<< HEAD
- * Class FileReader - reads a text file. While reading the file, initatites page objects.
-=======
  * Class FileReader - read a  text file. While reading the file, it initatites page objects.
->>>>>>> 0671768a90c1fbe5f8a3b88397c7fd5edee84fcc
  *
  * This class is part of the "WebServer" application.  
  * 

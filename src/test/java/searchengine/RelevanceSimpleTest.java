@@ -61,7 +61,7 @@ public class RelevanceSimpleTest {
     }
 
     @Test
-    void checkOneSimple(){ 
+    void checkOneWordRelevanceSimple(){ 
         var this1 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
         var result = rlv.getMapOfRelevance();
@@ -79,7 +79,7 @@ public class RelevanceSimpleTest {
     }
 
     @Test
-    void check2WordBlocksAndTheRlvSimple() {
+    void check2WordBlocksRelevanceSimple() {
         var this1 = index.matchingPages("word1");
         var this2 = index.matchingPages("word2");
         rlv.calculatingRelevance(this2, second);
@@ -94,7 +94,7 @@ public class RelevanceSimpleTest {
 }
 
 @Test
-void checkaWithORSimple() {
+void checkaWithORRelevanceSimple() {
     ArrayList<String[]> list = new ArrayList<>();
     list.add(third);
     list.add(fourth);
