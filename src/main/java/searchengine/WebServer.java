@@ -27,15 +27,13 @@ public class WebServer {
   FileReader fileReader;
   Index index;
   Relevance relevance;
-  
-
-    
+      
     /** 
-     * explenation
+     * Initiates the Index, Relevance, Filerader and Server objects
      * @param port port
      * @param filename the name of file
      * @param indexType the type of index
-     * @param relevanceType the way of calculating relevance
+     * @param relevanceType the type of relevance
      */
     public WebServer(int port, String filename, String indexType, String relevanceType) {
       
@@ -74,8 +72,7 @@ public class WebServer {
     }
 
       /**
-       * creates readable content of file for server in bytes
-       * 
+       * Creates readable content of file for server in bytes
        * @param filename, name of file to be translated into bytes
        * @return file translated to bytes
        */
@@ -90,7 +87,6 @@ public class WebServer {
 
       /**
       * Searches for search input in index database 
-      * 
       * @param io, HttpExchange
       */
       public void search(HttpExchange io) {  
@@ -103,8 +99,7 @@ public class WebServer {
       }
 
       /**
-       * cretes a response for search input
-       * 
+       * Generates a response for search input
        * @param io, HttpExchange
        * @param correctPages, ArrayList of results matching the SearchWord
        */
@@ -118,7 +113,6 @@ public class WebServer {
 
       /**
        * Displays the response on the server
-       * 
        * @param io, HttpExchange
        * @param code, integer
        * @param mime, String(application/json)

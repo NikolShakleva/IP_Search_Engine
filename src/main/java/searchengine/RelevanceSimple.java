@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class RelevanceTermFrequency - Calculates the Term Frequency relevance for each of the Page object
+ * Class RelevanceTermFrequency - Calculates the Simple relevance for each of the Page objects
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.12.10
@@ -14,24 +14,25 @@ import java.util.Map;
  */
 
 public class RelevanceSimple implements Relevance {
-    private Map<String, HashMap<Page, Double>> wordsrelevanceMap;//map of all of the words (as keywords)
+    private Map<String, HashMap<Page, Double>> wordsrelevanceMap;
     private Map<Page, Double> sort;
 
     /** 
-     * Creates a HashMap that stores words and pages with Relevance Simple values associated to each page
-     * @param indexWordsToPages The HashMap consisting of all of the words and pages that contand each word 
+     * Creates a HashMap that stores words as keys and Pages with Relevance Simple score as values
+     * Initialise the wordsrelevanceMap which has a word as a key and a HashMap of Pages containing the map key and their corresponding relevance score as a value
+     * @param indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
      */
-    public RelevanceSimple(Map<String, ArrayList<Page>> indexWordsToPages)  {   //webserver sends this map after retrieving this form the index
+    public RelevanceSimple(Map<String, ArrayList<Page>> indexWordsToPages)  {  
         wordsrelevanceMap = new HashMap<>();
         sort = new HashMap<>();
         makeRelevanceMap(indexWordsToPages); 
     }
 
         /** 
-         * Calculates the TFIDF value for each page for each word. Fills up the wordsrelevanceMap
-         * @param mapFromIndex The HashMap consisting of all of the words and pages that contain each word
+         * Calculates the Simple Relevance score for each word in a Page object. Fills up the wordsrelevanceMap which has a word as a key and a HashMap of Pages containing the map key and their corresponding relevance score as a value
+         * @param mapFromIndex indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
          */
-        public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {   //calculates the simple relevance for each word for each page
+        public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {   
             for(String word : mapFromIndex.keySet())    {
                 HashMap<Page, Double> hashmapRelevanceValue = new HashMap<>();
                 for(Page page : mapFromIndex.get(word)) {
@@ -44,9 +45,9 @@ public class RelevanceSimple implements Relevance {
         }
 
         /** 
-         * Calculates the relevance for each page that is being send to the responder
-         * @param matchesAllWords ArrayList of Page objects that is being send to the Responder
-         * @param words String[], Array of key words
+         * Calculates the relevance score for each page and stors the result in a HashMap which has Page object as a key and the revelence score calculated in double as a value
+         * @param matchesAllWords ArrayList of Page objects that are containing the words coming from the user search in the Query class
+         * @param words String[], Array of words representing each individual word searched by the user 
          */
         public void calculatingRelevance(ArrayList<Page> matchesAllWords,String[] words)    {
             HashMap<Page, Double> currentSearchString = new HashMap<>();
@@ -85,12 +86,15 @@ public class RelevanceSimple implements Relevance {
 	    }
         
         /** 
-         * @return a Map of Page objects and its relevance values
+         * @return a Map containing Page objects as keys and Relevance score as values. 
+         * This map is sent to the Responder class
          */
         public Map<Page, Double> getMapOfRelevance()    {
             return sort;
         }
-        
+        /**
+         * Empties the content of the sort containing Page objects as keys and Relevance score as values
+         */
         public void clearMap()  {
             sort.clear();
         }

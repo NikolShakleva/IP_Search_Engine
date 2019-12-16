@@ -3,7 +3,7 @@ package searchengine;
 import java.util.*;
 
 /**
- * Class IndexHash - Stores all page objects from the file in a HashMap
+ * Class IndexHash - Stores all Page objects from the file in a HashMap
  * @author Emelie, Ewa, Nikol, Philip
  * @version 2019.11.24
  * 
@@ -13,7 +13,7 @@ public class IndexHash implements Index {
     private ArrayList<Page> allPages;
 
     /**
-     * Creates a HashMap which stores all page objects
+     * Creates a HashMap which stores all Page objects
      * @param allPages The ArrayList of Page objects of allPages passed from the FileReader class
      */
     public IndexHash(ArrayList<Page> allPages) {
@@ -22,8 +22,8 @@ public class IndexHash implements Index {
         makeHashMap();
     }
         /**
-        * Converts the allPages ArrayList from the FileReader to a HashMap where the key is a String object and the value is ArrayList of Page objects called wordsToPages
-        * @return return the wordsToPages HashMap where the key is a String object and the value is ArrayList of Page objects
+        * Converts the allPages ArrayList of Pages coming from the FileReader to a HashMap where the key is a String object and the value is ArrayList of Page objects called wordsToPages
+        * @return return the wordsToPages HashMap
         */
         public HashMap<String, ArrayList<Page>> makeHashMap() {
             for (Page page : allPages) {
@@ -45,7 +45,7 @@ public class IndexHash implements Index {
         }
 
         /**
-         * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList of Page objects
+         * Check if the map key matches the input paratemer and returns the value corresponding to the map key as an ArrayList of Page objects
          * @param input String input coming from the Query class representing a key of the wordsToPages map
          * @return  The values of the corresponding key as an ArrayList of Page objects
          */
@@ -58,7 +58,7 @@ public class IndexHash implements Index {
             return matchingPages;
         }
         /**
-         * @return The ArrayList of Page objects of all page objects coming from the FileReader class
+         * @return The ArrayList of all Page objects coming from the FileReader class
          */
         public ArrayList<Page> getAllPages()  {
             return allPages;
