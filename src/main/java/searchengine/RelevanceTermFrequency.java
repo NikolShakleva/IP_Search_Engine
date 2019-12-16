@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Class RelevanceTermFrequency - Calculates the Term Frequency relevance for each of the Page object
+ * Class RelevanceTermFrequency - Calculates the Term Frequency relevance for each of the Page objects
  * 
  * @author Ewa, Emelie, Nikol, Philip
  * @version 2019.12.10
@@ -17,8 +17,8 @@ public class RelevanceTermFrequency implements Relevance    {
     private Map<Page, Double> sort;
     
     /** 
-     * Creates a HashMap that stores words and pages with Term Frequency values associated to each page
-     * @param indexWordsToPages The HashMap consisting of all of the words and pages that contand each word 
+     * Creates a HashMap that stores words as keys and Pages with Relevance Term Frequency score as values
+     * @param indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
      */
     public RelevanceTermFrequency(Map<String, ArrayList<Page>> indexWordsToPages)   {
         wordsrelevanceMap = new HashMap<>();
@@ -27,9 +27,9 @@ public class RelevanceTermFrequency implements Relevance    {
     }
 	    
         /** 
-         * Calculates the relevance for each page that is being send to the responder
-         * @param matchesAllWords ArrayList of Page objects that is being send to the Responder
-         * @param words String[], Array of key words
+         * Calculates the relevance score for each page and stors the result in a HashMap which has Page object as a key and the revelence score calculated in double as a value
+         * @param matchesAllWords ArrayList of Page objects that are containing the words coming from the user search in the Query class
+         * @param words String[], Array of words representing each individual word searched by the user 
          */
         public void calculatingRelevance(ArrayList<Page> matchesAllWords, String[] words) {
             HashMap<Page, Double> currentSearchString = new HashMap<>();
@@ -66,8 +66,8 @@ public class RelevanceTermFrequency implements Relevance    {
 	    }   
 	    
         /** 
-         * Calculates the Term Frequency value for each page for each word. Fills up the wordsrelevanceMap
-         * @param mapFromIndex The HashMap consisting of all of the words and pages that contain each word
+         * Calculates the Term Frequency score for each word in a Page object. Fills up the wordsrelevanceMap which has a word as a key and a HashMap of Pages containing the map key and their corresponding relevance score as a value
+         * @param mapFromIndex indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
          */
         public void makeRelevanceMap(Map<String, ArrayList<Page>> mapFromIndex) {
             for(String word : mapFromIndex.keySet())    {
@@ -81,14 +81,16 @@ public class RelevanceTermFrequency implements Relevance    {
                 wordsrelevanceMap.put(word, hashmapRelevanceValue);
             }
 	    }
-
         /** 
-         * @return a Map of Page objects and its relevance values
+         * @return a HashMap containing Page objects as keys and Relevance score as values. 
+         * This map is sent to the Responder class
          */
         public Map<Page, Double> getMapOfRelevance() {
 		    return sort;
         }
-
+        /**
+         * Empties the content of the sort containing Page objects as keys and Relevance score as values
+         */
         public void clearMap()  {
             sort.clear();
         } 

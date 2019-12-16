@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class FileReader - read a  text file. While reading the file, initatites page objects.
+ * Class FileReader - read a  text file. While reading the file, it initatites page objects.
  *
  * This class is part of the "WebServer" application.  
  * 
@@ -19,8 +19,7 @@ public class FileReader {
 
     /**
      * Initaiates arrayList of pages
-     * Read the text file
-     * It creates page objects while reading the file.
+     * It creates page objects while reading a text file.
      * Stores the page objects into the ArrayList of pages
      * @param filename The name of the text file, coming from the WebServer class.
      */
@@ -29,8 +28,7 @@ public class FileReader {
         readFile(filename);
     }
         /**
-        * Reading the file given from the webserver and creates pages that are added to an arrayList of pages
-        * 
+        * Reading the file coming from the Webserver and creates pages that are added to an arrayList of pages
         * @param filename, filename of text file with websites containing url, title and words
         */
         public void readFile(String filename)   {     
