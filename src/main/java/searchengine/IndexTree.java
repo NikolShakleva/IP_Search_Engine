@@ -22,8 +22,8 @@ public class IndexTree implements Index {
         wordsToPages = new TreeMap<>();
         makeTreeMap();
     }
-        /**
-        * Converts the allPages ArrayList from the FileReader to a TreeMap called wordsToPages
+         /**
+        * Converts the allPages ArrayList of Pages coming from the FileReader to a TreeMap where the key is a String object and the value is ArrayList of Page objects called wordsToPages
         * @return return the wordsToPages TreeMap
         */
         public Map<String, ArrayList<Page>> makeTreeMap() {
@@ -45,11 +45,11 @@ public class IndexTree implements Index {
             return wordsToPages;
         }
 
-         /**
-        * Check the mapKey matching the input paratemer and returns the value corresponding to the key as an ArrayList of Page object
-        * @param input String input coming from the Query class representing a key of the wordsToPages map
-        * @return  The values of the corresponding key as an ArrayList of Page objects
-        */
+        /**
+         * Check if the map key matches the input paratemer and returns the value corresponding to the map key as an ArrayList of Page objects
+         * @param input String input coming from the Query class representing a key of the wordsToPages map
+         * @return  The values of the corresponding key as an ArrayList of Page objects
+         */
         public ArrayList<Page> matchingPages(String input)   {
             ArrayList<Page> matchingPages = new ArrayList<Page>();
             if(wordsToPages.containsKey(input))  {
@@ -57,16 +57,16 @@ public class IndexTree implements Index {
             } return matchingPages;
         }
 
-        /**
-        * @return The ArrayList of Page objects of all page objects coming from the FileReader class
-        */
+       /**
+         * @return The ArrayList of all Page objects coming from the FileReader class
+         */
         public ArrayList<Page> getAllPages()  {
             return allPages;
         }
 
-        /**
-        * @return TreeMap mapping words to page objects
-        */
+         /**
+         * @return the wordsToPage map contains of String as its keys and ArrayList of Page objects as its values.
+         */
         public Map<String, ArrayList<Page>> getwordsToPages()   {
             return wordsToPages;
         }
