@@ -139,10 +139,9 @@ public class WebServer {
 
       public static void main(String[] args) {
         try {
+          
         var filename = Files.readString(Paths.get("config.txt")).strip();
         new WebServer(PORT, filename,"hash", "tfidf");
-        //var webserver = new WebServer(PORT, filename, "hash");
-        //webserver.search("word1 word2 OR word2 word4");
 
         } catch (IOException e) {
           System.out.println("File not found");
