@@ -60,7 +60,7 @@ public class RelevanceTFIDFTest {
     }
 
     @Test
-    void checkOne(){ 
+    void checkOneWordRelevanceTFIDF(){ 
         var this1 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
         var result = rlv.getMapOfRelevance();
@@ -78,7 +78,7 @@ public class RelevanceTFIDFTest {
     }
 
     @Test
-    void check2WordBlocksAndTheRlvTFIDF() {
+    void check2WordBlocksRelevanceTFIDF() {
         var this1 = index.matchingPages("word1");
         var this2 = index.matchingPages("word2");
         rlv.calculatingRelevance(this1, first);
@@ -91,7 +91,7 @@ public class RelevanceTFIDFTest {
     resultOrderd.toString());
 }
 @Test
-void checkaWithORTFIDF() {
+void checkaWithORRelevanceTFIDF() {
     ArrayList<String[]> list = new ArrayList<>();
     list.add(third);
     list.add(fourth);
