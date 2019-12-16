@@ -19,9 +19,10 @@ public class RelevanceTFIDF implements Relevance {
     private Index index;
 
     /** 
-     * Creates a HashMap that stores words and its idf values
-     * Creates a HashMap that stores words and pages with tfidf values associated to each page
-     * @param indexWordsToPages The HashMap consisting of all of the words and pages that contand each word
+     * Creates a HashMap that stores words as keys and its word's IDF score as values
+     * Creates a HashMap that stores words as keys and Pages with Relevance TFIDF score as values
+     * * Initialise the wordsrelevanceMap which has a word as a key and a HashMap of Pages containing the map key and their corresponding relevance score as a value
+     * @param indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
      * @param index the Index object 
      */
     public RelevanceTFIDF(Map<String, ArrayList<Page>> indexWordsToPages, Index index) {
@@ -33,7 +34,7 @@ public class RelevanceTFIDF implements Relevance {
     }
     
        /** 
-        * Creates a HashMap that stores words as keys and Pages with TFIDF score as values
+        * Creates a HashMap that stores words as keys and Pages with IDF score as values
         * @param indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
         */
         public void makeIDF(Map<String, ArrayList<Page>> indexWordsToPages){

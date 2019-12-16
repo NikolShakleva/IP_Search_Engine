@@ -19,6 +19,7 @@ public class RelevanceSimple implements Relevance {
 
     /** 
      * Creates a HashMap that stores words as keys and Pages with Relevance Simple score as values
+     * Initialise the wordsrelevanceMap which has a word as a key and a HashMap of Pages containing the map key and their corresponding relevance score as a value
      * @param indexWordsToPages The HashMap coming from the IndexHash class having word as key and Page objects containing the word as a value
      */
     public RelevanceSimple(Map<String, ArrayList<Page>> indexWordsToPages)  {  
