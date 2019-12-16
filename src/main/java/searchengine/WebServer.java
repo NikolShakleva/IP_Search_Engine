@@ -135,7 +135,7 @@ public class WebServer {
           io.close();
         }
       }
-
+/*
       public static void main(String[] args) {
         try {
         var filename = Files.readString(Paths.get("config.txt")).strip();
@@ -149,6 +149,6 @@ public class WebServer {
         }
      
       
-      }
+      }*/
 }
     
